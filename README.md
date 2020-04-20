@@ -12,9 +12,11 @@
 - Arbeit mit Pull Requests -> Keine direkten Commits auf den Branch -> Mit Bestätigung eines Reviewers kann in developer gemergt werden.
 
 ## Commit guidelines
-<Imperativ Präsens><Prägnante Beschreibung>: "Add/ Fix/ Test/ Implement/ Extend web controller" - kein "Added" etc.
-<Leerzeile>
-<Ticketreferenz>: "Closes/ Fixes/ .. #ticket-number
+< Imperativ Präsens >< Prägnante Beschreibung >: "Add/ Fix/ Test/ Implement/ Extend web controller" - kein "Added" etc.
+
+< Leerzeile >
+
+< Ticketreferenz >: "Closes/ Fixes/ .. #ticket-number
   
 ### Beispiele:
 - [Angular](https://firebase.google.com/)
