@@ -11,12 +11,14 @@ describe('UserService', () => {
   let httpTestingController: HttpTestingController;
   let service: UserService;
 
-  const MOCK_USER: User = {};
+  const EXAMPLE_ID = 0;
+  const MOCK_USER: User = {
+    id: EXAMPLE_ID
+  };
   const MOCK_CREDENTIALS: UserCredentials = {
     email: "test@test.de",
     password: "Pa$$w0rd"
   }
-  const EXAMPLE_ID_ON_REGISTER = 0;
 
 
   beforeEach(() => {
@@ -47,9 +49,9 @@ describe('UserService', () => {
     });
 
     httpTestingController.expectOne(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_REGISTER)
-      .flush(EXAMPLE_ID_ON_REGISTER);
+      .flush(EXAMPLE_ID);
 
-    expect(newId).toBe(EXAMPLE_ID_ON_REGISTER);
+    expect(newId).toBe(EXAMPLE_ID);
   });
 
   it('should get a valid profile on successful login', () => {
@@ -63,5 +65,27 @@ describe('UserService', () => {
       .flush(MOCK_USER);
 
     expect(receivedUserProfile).toBe(MOCK_USER);
+  });
+
+  it('should send an ID and receive a corresponding profile', () => {
+    let receivedUserProfile;
+
+    service.getProfile(EXAMPLE_ID).subscribe(reponseUserProfile => {
+      receivedUserProfile = reponseUserProfile;
+    });
+
+    httpTestingController.expectOne(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_PROFILE)
+      .flush(MOCK_USER);
+
+    expect(receivedUserProfile).toBe(MOCK_USER);
+  });
+
+  it('should send an updated user profile', () => {
+    service.updateProfile(MOCK_USER).subscribe(responseStatus => {
+
+    });
+
+    // TODO: Further research what updateProfile should return + how services should be tested properly
+    httpTestingController.expectOne(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_PROFILE_EDIT).flush({});
   });
 });

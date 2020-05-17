@@ -24,4 +24,12 @@ export class UserService {
   public login(userCredentials: UserCredentials): Observable<User> {
     return this.http.post<User>(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_LOGIN, userCredentials);
   }
+
+  public getProfile(userId: number): Observable<User> {
+    return this.http.post<User>(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_PROFILE, userId);
+  }
+
+  public updateProfile(updatedProfile: User): Observable<number> {
+    return this.http.post<number>(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_PROFILE_EDIT, updatedProfile);
+  }
 }
