@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './service/http-error.interceptor';
+import { AuthorizationInterceptor } from './service/authorization.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,12 @@ import { HttpErrorInterceptor } from './service/http-error.interceptor';
         provide: HTTP_INTERCEPTORS,
         useClass: HttpErrorInterceptor,
         multi: true
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthorizationInterceptor,
+      multi: true
+  }
   ],
   bootstrap: [AppComponent]
 })
