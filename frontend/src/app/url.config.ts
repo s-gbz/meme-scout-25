@@ -1,6 +1,6 @@
 
 export class UrlConfig {
-    public static readonly BACKEND_BASE_URL: string = "virtserver.swaggerhub.com/s-gbz/MemeScout25/1.0.1";
+    public static readonly BACKEND_BASE_URL: string = "virtserver.swaggerhub.com/s-gbz/MemeScout25";
 
     public static readonly USER_REGISTER: string = "/user/register";
     public static readonly USER_LOGIN: string = "/user/login";
