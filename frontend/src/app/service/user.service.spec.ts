@@ -3,15 +3,21 @@ import { UserService } from './user.service';
 import { User } from '../shared/model/user';
 import { HttpClientTestingModule,
   HttpTestingController } from '@angular/common/http/testing';
-import { AppSettings } from '../app.settings';
+import { UrlConfig } from '../url.config';
+import { UserCredentials } from '../shared/model/user-credentials';
 
 
 describe('UserService', () => {
   let httpTestingController: HttpTestingController;
   let service: UserService;
 
-  const mockUser: User = {};
+  const MOCK_USER: User = {};
+  const MOCK_CREDENTIALS: UserCredentials = {
+    email: "test@test.de",
+    password: "Pa$$w0rd"
+  }
   const EXAMPLE_ID_ON_REGISTER = 0;
+
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -36,14 +42,26 @@ describe('UserService', () => {
   it('should get status code 200 on successful register', () => {
     let newId;
 
-    service.register(mockUser).subscribe(reponseId => {
+    service.register(MOCK_USER).subscribe(reponseId => {
       newId = reponseId;
     });
 
-    httpTestingController.expectOne(AppSettings.BACKEND_BASE_URL + AppSettings.USER_REGISTER)
+    httpTestingController.expectOne(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_REGISTER)
       .flush(EXAMPLE_ID_ON_REGISTER);
 
     expect(newId).toBe(EXAMPLE_ID_ON_REGISTER);
   });
 
+  it('should get a valid profile on successful login', () => {
+    let receivedUserProfile;
+
+    service.login(MOCK_CREDENTIALS).subscribe(reponseUserProfile => {
+      receivedUserProfile = reponseUserProfile;
+    });
+
+    httpTestingController.expectOne(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_LOGIN)
+      .flush(MOCK_USER);
+
+    expect(receivedUserProfile).toBe(MOCK_USER);
+  });
 });

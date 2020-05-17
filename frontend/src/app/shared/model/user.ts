@@ -1,5 +1,5 @@
 import { Biography } from './biography';
-import { MemePreference } from './memePreference';
+import { MemePreference } from './meme-preference';
 
 export interface User { 
     id?: number;
