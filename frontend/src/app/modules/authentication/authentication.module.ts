@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthenticationPage } from './authentication.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ValidationMessageModule } from 'src/app/shared/validation-message/validation-message.module';
 
 const routes: Routes = [
   {

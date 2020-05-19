@@ -1,19 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ValidationMessageModule } from './validation-message/validation-message.module';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
   ],
   exports: [
     CommonModule,
     FormsModule,
-    IonicModule
+    ReactiveFormsModule,
+    IonicModule,
+    ValidationMessageModule
   ]
 })
 export class SharedModule { }

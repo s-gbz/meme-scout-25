@@ -19,14 +19,20 @@ export class RegisterComponent implements OnInit {
   
   createRegisterForm() {
     this.registerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(50)]],
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
-      password: ['', [Validators.required, Validators.maxLength(100)]],
-      confirmPassword: ['', [Validators.required, , Validators.maxLength(100)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
+      confirmPassword: ['', [Validators.required, Validators.maxLength(100)]],
+      agreeWithTerms: ['', Validators.requiredTrue]
     },
     {
       validators: Validation.passwordMatchValidator
     })
+  }
+
+  submitRegisterForm() {
+    // TODO: Adapt registration process with API
+    console.log(this.registerForm.value);
   }
 
 }

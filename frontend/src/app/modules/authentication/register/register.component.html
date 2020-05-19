@@ -1,28 +1,46 @@
 <ion-content>
-  <form [formGroup]="registerForm" (ngSubmit)="register(form)">
+  <form [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <div text-center>
-            <h3>Sign up for a free account</h3>
-          </div>
+            <h3 id="signUpTitle">Sign up for a free account</h3>
           <div padding>
+
             <ion-item>
               <ion-input formControlName="name" type="text" placeholder="Your Name"></ion-input>
             </ion-item>
+            <shared-validation-message [inputField]="registerForm.controls.name" [inputName]="'Name'">
+            </shared-validation-message>
+            
             <ion-item>
               <ion-input formControlName="email" type="email" placeholder="your@email.com"></ion-input>
             </ion-item>
+            <shared-validation-message [inputField]="registerForm.controls.email" [inputName]="'Email'">
+            </shared-validation-message>
+
             <ion-item>
               <ion-input formControlName="password" type="password" placeholder="Create password"></ion-input>
             </ion-item>
+            <shared-validation-message [inputField]="registerForm.controls.password" [inputName]="'Create Password'">
+            </shared-validation-message>
+
             <ion-item>
               <ion-input formControlName="confirmPassword" type="password" placeholder="Repeat password"></ion-input>
             </ion-item>
+            <shared-validation-message [inputField]="registerForm.controls.confirmPassword" [inputName]="'Repeat Password'">
+            </shared-validation-message>
+
+            <ion-item>
+              <ion-checkbox formControlName="agreeWithTerms" checked="false"></ion-checkbox>
+              <ion-label id="agreeWithTermsCheckbox">&nbsp; I agree with the terms of service & the privacy policy.</ion-label>
+            </ion-item>
+            <shared-validation-message [inputField]="registerForm.controls.agreeWithTerms" [inputName]="'Accepting the terms'">
+            </shared-validation-message>
+
           </div>
           <div padding>
             <ion-button size="large" type="submit" [disabled]="registerForm.invalid" expand="block">Sign Up</ion-button>
-            <ion-button size="large" color="secondary" expand="block">Have an account? Sign in</ion-button>
+            <ion-button size="large" color="secondary" expand="block">Have an account? <b>Sign in</b></ion-button>
           </div>
         </ion-col>
       </ion-row>
