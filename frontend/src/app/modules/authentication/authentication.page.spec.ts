@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthenticationPage } from './authentication.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { RegisterModule } from './register/register.module';
+import { LoginModule } from './login/login.module';
 
 describe('AuthenticationPage', () => {
   let component: AuthenticationPage;
@@ -15,7 +17,9 @@ describe('AuthenticationPage', () => {
       ],
       imports: [
         SharedModule,
-        RouterTestingModule
+        RouterTestingModule,
+        RegisterModule,
+        LoginModule
       ]
     }).compileComponents();
 

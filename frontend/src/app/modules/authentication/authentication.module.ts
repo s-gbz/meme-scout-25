@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthenticationPage } from './authentication.page';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ValidationMessageModule } from 'src/app/shared/validation-message/validation-message.module';
+import { RegisterModule } from './register/register.module';
+import { LoginModule } from './login/login.module';
 
 const routes: Routes = [
   {
@@ -31,7 +32,9 @@ const routes: Routes = [
   ],
   imports: [
     SharedModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    RegisterModule,
+    LoginModule
   ]
 })
 export class AuthenticationPageModule { }

@@ -1,2 +1,11 @@
-<button [routerLink]="'register'">REGISTER</button>
-<button [routerLink]="'login'">LOGIN</button>
+<!-- <button [routerLink]="'register'">REGISTER</button>
+<button [routerLink]="'login'">LOGIN</button> -->
+AUTH ATTACK!
+
+<ng-template *ngIf="router.url == '/register'">
+    <authentication-register></authentication-register>
+</ng-template>
+
+<ng-template *ngIf="router.url == '/login'">
+    <authentication-login></authentication-login>
+</ng-template>
