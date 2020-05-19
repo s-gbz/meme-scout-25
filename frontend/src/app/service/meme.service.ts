@@ -3,9 +3,9 @@ import { Observable } from 'rxjs';
 
 import { UrlConfig } from '../url.config';
 import { HttpClient } from '@angular/common/http';
-import { Meme } from '../model/meme';
-import { MemePreference } from '../model/meme-preference';
-import { MemeRating } from '../model/meme-rating';
+import { Meme } from '../shared/model/meme';
+import { MemePreference } from '../shared/model/meme-preference';
+import { MemeRating } from '../shared/model/meme-rating';
 
 @Injectable({
     providedIn: 'root'

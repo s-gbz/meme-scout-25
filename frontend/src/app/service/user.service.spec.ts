@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { UserService } from './user.service';
-import { User } from '../model/user';
+import { User } from '../shared/model/user';
 import { HttpClientTestingModule,
   HttpTestingController } from '@angular/common/http/testing';
 import { UrlConfig } from '../url.config';
-import { UserCredentials } from '../model/user-credentials';
+import { UserCredentials } from '../shared/model/user-credentials';
 
 
 describe('UserService', () => {

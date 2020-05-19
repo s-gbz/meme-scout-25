@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { UrlConfig } from '../url.config';
-import { UserMessage } from '../model/message';
+import { UserMessage } from '../shared/model/message';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './register.component';
 import { Routes, RouterModule } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: RegisterComponent }
@@ -12,7 +15,7 @@ const routes: Routes = [
     RegisterComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ]
 })

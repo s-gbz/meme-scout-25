@@ -3,7 +3,7 @@ import { MessageService } from './message.service';
 import { HttpClientTestingModule,
   HttpTestingController } from '@angular/common/http/testing';
 import { UrlConfig } from '../url.config';
-import { UserMessage } from '../model/message';
+import { UserMessage } from '../shared/model/message';
 
 
 describe('MessageService', () => {
