@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RegisterComponent } from './register.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -15,7 +16,8 @@ describe('RegisterComponent', () => {
       ],
       imports: [
         SharedModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        RouterTestingModule
       ]
     }).compileComponents();
 

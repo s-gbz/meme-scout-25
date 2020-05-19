@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-authentication',
+  selector: 'authentication-page',
   templateUrl: './authentication.page.html',
   styleUrls: ['./authentication.page.scss'],
 })

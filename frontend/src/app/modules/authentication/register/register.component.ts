@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Validation } from 'src/app/shared/validation';
 
 @Component({
-  selector: 'app-register',
+  selector: 'authentication-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
@@ -34,5 +34,4 @@ export class RegisterComponent implements OnInit {
     // TODO: Adapt registration process with API
     console.log(this.registerForm.value);
   }
-
 }
