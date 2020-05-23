@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'authentication-page',
@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
 })
 export class AuthenticationPage implements OnInit {
 
-  constructor(private router: Router) { }
+  authenticationModule: "register" | "login" = 'login';
+
+  constructor() { }
 
   ngOnInit() { }
 }

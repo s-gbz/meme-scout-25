@@ -1,11 +1,13 @@
-<!-- <button [routerLink]="'register'">REGISTER</button>
-<button [routerLink]="'login'">LOGIN</button> -->
-AUTH ATTACK!
-
-<ng-template *ngIf="router.url == '/register'">
-    <authentication-register></authentication-register>
-</ng-template>
-
-<ng-template *ngIf="router.url == '/login'">
-    <authentication-login></authentication-login>
-</ng-template>
+<ion-content [fullscreen]="true">
+    <ion-grid>
+        <ion-row >
+            <ion-col>
+                <div [ngSwitch]="authenticationModule">
+                    <authentication-register *ngSwitchCase="'register'"></authentication-register>
+                    <authentication-login *ngSwitchCase="'login'"></authentication-login>
+                    <authentication-login *ngSwitchDefault></authentication-login>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
