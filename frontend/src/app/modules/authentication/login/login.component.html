@@ -28,6 +28,10 @@
             <ion-button size="large" color="secondary" fill="outline" expand="block"
             [routerLink]="'/authentication'" [queryParams]="{component: 'register'}">No account yet? <b>Sign up</b></ion-button>
           </div>
+
+          <ion-item>
+            <div *ngIf="userIsLoggedIn()">User is logged in!</div>
+          </ion-item>
         </ion-col>
       </ion-row>
     </ion-grid>

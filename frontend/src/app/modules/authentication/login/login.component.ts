@@ -16,6 +16,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.createLoginForm();
   }
+
+  userIsLoggedIn() {
+    console.log(this.userService.uid);
+    
+    return this.userService.uid;
+  }
   
   createLoginForm() {
     this.loginForm = this.fb.group({

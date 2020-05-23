@@ -43,6 +43,11 @@
          </div>
          <div padding>
            <ion-button size="large" type="submit" [disabled]="registerForm.invalid" expand="block">Sign Up</ion-button>
+           <!-- <ion-button size="large" type="submit" expand="block">Sign Up</ion-button> -->
+
+           <ion-button size="large" color="secondary" fill="outline" (click)="loginWithGoogle()" expand="block"><ion-icon name="logo-google"></ion-icon>Sign up with Google</ion-button>
+           <ion-button size="large" color="secondary" fill="outline" (click)="loginWithGithub()" expand="block"><ion-icon name="logo-github"></ion-icon>Sign up with Github</ion-button>
+
            <ion-button size="large" color="secondary" expand="block" [routerLink]="'/authentication'" [queryParams]="{component: 'login'}">Have an account?
              <b>Sign in</b></ion-button>
          </div>
