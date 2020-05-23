@@ -21,6 +21,10 @@
           <div padding>
             <ion-button size="large" type="submit" [disabled]="loginForm.invalid" expand="block">Sign in</ion-button>
             <ion-button size="large" color="secondary" expand="block">Forgot password?</ion-button>
+
+            <ion-button size="large" color="secondary" fill="outline" (click)="loginWithGoogle()" expand="block"><ion-icon name="logo-google"></ion-icon>Sign in with Google</ion-button>
+            <ion-button size="large" color="secondary" fill="outline" (click)="loginWithGithub()" expand="block"><ion-icon name="logo-github"></ion-icon>Sign in with Github</ion-button>
+
             <ion-button size="large" color="secondary" fill="outline" expand="block"
             [routerLink]="'/authentication'" [queryParams]="{component: 'register'}">No account yet? <b>Sign up</b></ion-button>
           </div>
