@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'authentication-page',
@@ -8,9 +8,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AuthenticationPage implements OnInit {
 
-  authenticationModule: "register" | "login" = 'login';
+  authenticationComponent: "register" | "login" = 'login';
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.subscribeAndSwitchToRequestedAuthenticationComponent();
+  }
+
+  // ActivatedRoute is handled by Angular and doesn't need unsubscribing
+  subscribeAndSwitchToRequestedAuthenticationComponent() {
+    this.route.queryParams.subscribe((authComponent: Params) => {
+      this.authenticationComponent = authComponent['component'];
+      console.log(this.authenticationComponent);
+    });
+  }
 }

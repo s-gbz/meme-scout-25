@@ -2,7 +2,7 @@
     <ion-grid>
         <ion-row >
             <ion-col>
-                <div [ngSwitch]="authenticationModule">
+                <div [ngSwitch]="authenticationComponent">
                     <authentication-register *ngSwitchCase="'register'"></authentication-register>
                     <authentication-login *ngSwitchCase="'login'"></authentication-login>
                     <authentication-login *ngSwitchDefault></authentication-login>

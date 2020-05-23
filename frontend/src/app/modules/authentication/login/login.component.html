@@ -22,7 +22,7 @@
             <ion-button size="large" type="submit" [disabled]="loginForm.invalid" expand="block">Sign in</ion-button>
             <ion-button size="large" color="secondary" expand="block">Forgot password?</ion-button>
             <ion-button size="large" color="secondary" fill="outline" expand="block"
-              routerLink="/authentication/register">No account yet? <b>Sign up</b></ion-button>
+            [routerLink]="'/authentication'" [queryParams]="{component: 'register'}">No account yet? <b>Sign up</b></ion-button>
           </div>
         </ion-col>
       </ion-row>
