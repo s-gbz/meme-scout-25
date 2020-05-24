@@ -19,6 +19,7 @@ export class UserService {
   public isAuthenticated: boolean;
   public authToken: string;
 
+  // TODO
   uid = this.afAuth.authState.pipe(
     map(authState => {
       if(!authState) {
@@ -35,7 +36,7 @@ export class UserService {
     return this.afAuth.createUserWithEmailAndPassword(email, password);
   }
 
-  // Unimplemented as of right now
+  // Unused as of right now
   public async checkIfEmailIsAvailable(email: string): Promise<boolean>{
     let emailIsAvailable = false;
 
@@ -49,27 +50,28 @@ export class UserService {
     return emailIsAvailable;
   }
 
-  public login(userCredentials: UserCredentials) {
-    this.afAuth.signInWithEmailAndPassword(userCredentials.email, userCredentials.password).then()
-    
+  public login(email: string, password: string): Promise<any> {
+    return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
-  public loginWithGoogle() {
-    this.afAuth.signInWithPopup(new auth.GoogleAuthProvider);
+  public loginWithGoogle(): Promise<any> {
+    return this.afAuth.signInWithPopup(new auth.GoogleAuthProvider);
   }
 
-  public loginWithGithub() {
-    this.afAuth.signInWithPopup(new auth.GithubAuthProvider);
+  public loginWithGithub(): Promise<any> {
+    return this.afAuth.signInWithPopup(new auth.GithubAuthProvider);
   }
 
   public async logout() {
     await this.afAuth.signOut();
   }
 
+  // TODO: Switch to Firebase
   public getProfile(userId: number): Observable<User> {
     return this.http.post<User>(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_PROFILE, userId);
   }
 
+  // TODO: Switch to Firebase
   public updateProfile(updatedProfile: User): Observable<number> {
     return this.http.post<number>(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_PROFILE_EDIT, updatedProfile);
   }
