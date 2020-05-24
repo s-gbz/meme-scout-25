@@ -21,9 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   userIsLoggedIn() {
-    console.log(this.userService.uid);
-    
-    return this.userService.uid;
+
   }
   
   createLoginForm() {
@@ -57,7 +55,6 @@ export class LoginComponent implements OnInit {
   }
 
   private openMemeView() {
-    // TODO adapt & unify route in other PR
     console.log("TODO adapt & unify route in other PR");
     this.router.navigateByUrl("/meme-view");
   }

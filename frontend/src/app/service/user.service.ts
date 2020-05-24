@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../shared/model/user';
-import { Observable } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { UrlConfig } from '../url.config';
-import { UserCredentials } from '../shared/model/user-credentials';
 import { auth } from 'firebase';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,54 +15,40 @@ import { map } from 'rxjs/operators';
 
 export class UserService {
 
-  public isAuthenticated: boolean;
-  public authToken: string;
+  authStatus = new BehaviorSubject<firebase.User>(null);
+  authenticatedUser: firebase.User;
 
-  // TODO
-  uid = this.afAuth.authState.pipe(
-    map(authState => {
-      if(!authState) {
-        return null;
-      } else {
-        return authState.uid;
-      }
-    })
-  )
+  constructor(private http: HttpClient, private afAuth: AngularFireAuth) { }
 
-  constructor(private http: HttpClient, private afAuth: AngularFireAuth, private afs: AngularFirestore) { }
-  
+
   public register(email: string, password: string): Promise<any> {
-    return this.afAuth.createUserWithEmailAndPassword(email, password);
-  }
-
-  // Unused as of right now
-  public async checkIfEmailIsAvailable(email: string): Promise<boolean>{
-    let emailIsAvailable = false;
-
-    await this.afAuth.fetchSignInMethodsForEmail(email)
-    .then((signInMethods) => {
-      if(signInMethods.length === 0) {
-        emailIsAvailable = true;
-      }
-    });
-
-    return emailIsAvailable;
+    return this.afAuth.createUserWithEmailAndPassword(email, password)
+      .then((user: auth.UserCredential) => this.authenticateUser(user));
   }
 
   public login(email: string, password: string): Promise<any> {
-    return this.afAuth.signInWithEmailAndPassword(email, password);
+    return this.afAuth.signInWithEmailAndPassword(email, password)
+      .then((user: auth.UserCredential) => this.authenticateUser(user));
   }
 
   public loginWithGoogle(): Promise<any> {
-    return this.afAuth.signInWithPopup(new auth.GoogleAuthProvider);
+    return this.afAuth.signInWithPopup(new auth.GoogleAuthProvider)
+      .then((user: auth.UserCredential) => this.authenticateUser(user));
   }
 
   public loginWithGithub(): Promise<any> {
-    return this.afAuth.signInWithPopup(new auth.GithubAuthProvider);
+    return this.afAuth.signInWithPopup(new auth.GithubAuthProvider)
+    .then((user: auth.UserCredential) => this.authenticateUser(user));
   }
 
   public async logout() {
     await this.afAuth.signOut();
+  }
+
+  private authenticateUser(user: auth.UserCredential) {
+    this.authStatus.next(user.user);
+    this.authenticatedUser = user.user;
+    console.log("authenticateUser! uid:" + user.user.uid);
   }
 
   // TODO: Switch to Firebase
@@ -74,5 +59,19 @@ export class UserService {
   // TODO: Switch to Firebase
   public updateProfile(updatedProfile: User): Observable<number> {
     return this.http.post<number>(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_PROFILE_EDIT, updatedProfile);
+  }
+
+  // Unused as of right now
+  public async checkIfEmailIsAvailable(email: string): Promise<boolean> {
+    let emailIsAvailable = false;
+
+    await this.afAuth.fetchSignInMethodsForEmail(email)
+      .then((signInMethods) => {
+        if (signInMethods.length === 0) {
+          emailIsAvailable = true;
+        }
+      });
+
+    return emailIsAvailable;
   }
 }
