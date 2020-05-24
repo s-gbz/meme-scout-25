@@ -43,12 +43,13 @@ export class UserService {
 
   public async logout() {
     await this.afAuth.signOut();
+    this.authStatus.next(null);
+    this.authenticatedUser = null;
   }
 
   private authenticateUser(user: auth.UserCredential) {
     this.authStatus.next(user.user);
     this.authenticatedUser = user.user;
-    console.log("authenticateUser! uid:" + user.user.uid);
   }
 
   // TODO: Switch to Firebase

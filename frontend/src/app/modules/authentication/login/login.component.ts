@@ -41,11 +41,11 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithGoogle() {
-    this.userService.loginWithGoogle();
+    this.resolveLoginPromise(this.userService.loginWithGoogle());
   }
 
   loginWithGithub() {
-    this.userService.loginWithGithub();
+    this.resolveLoginPromise(this.userService.loginWithGithub());
   }
 
   private resolveLoginPromise(authFunction: Promise<any>) {
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
 
   private openMemeView() {
     console.log("TODO adapt & unify route in other PR");
-    this.router.navigateByUrl("/meme-view");
+    this.router.navigateByUrl("/tabs");
   }
 
   private handleError(error: Error) {

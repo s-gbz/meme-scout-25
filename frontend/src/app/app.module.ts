@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './service/http-error.interceptor';
-import { AuthorizationInterceptor } from './service/authorization.interceptor';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -48,12 +47,7 @@ const firebaseConfig = {
         provide: HTTP_INTERCEPTORS,
         useClass: HttpErrorInterceptor,
         multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthorizationInterceptor,
-      multi: true
-  }
+    }
   ],
   bootstrap: [AppComponent]
 })
