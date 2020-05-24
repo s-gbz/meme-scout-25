@@ -8,7 +8,11 @@ const routes: Routes = [
   },
   {
     path: 'authentication',
-    loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationPageModule)
+    loadChildren: () => import('./modules/authentication/register/register.module').then(m => m.RegisterModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule)
   }
 ];
 @NgModule({
