@@ -1,0 +1,34 @@
+  <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
+    <ion-grid>
+      <ion-row color="primary" lines="full">
+        <ion-col size-md="6" size-lg="5" size-xs="12">
+          <h3 class="bold-center">Sign in with existing account</h3>
+          <div padding>
+
+            <ion-item>
+              <ion-input formControlName="email" type="email" placeholder="Your email"></ion-input>
+            </ion-item>
+            <shared-validation-message [inputField]="loginForm.controls.email" [inputName]="'Email'">
+            </shared-validation-message>
+
+            <ion-item>
+              <ion-input formControlName="password" type="password" placeholder="Your password"></ion-input>
+            </ion-item>
+            <shared-validation-message [inputField]="loginForm.controls.password" [inputName]="'Password'">
+            </shared-validation-message>
+          </div>
+
+          <div padding>
+            <ion-button size="large" type="submit" [disabled]="loginForm.invalid" expand="block">Sign in</ion-button>
+            <ion-button size="large" color="secondary" expand="block">Forgot password?</ion-button>
+
+            <ion-button size="large" color="secondary" fill="outline" (click)="loginWithGoogle()" expand="block"><ion-icon name="logo-google"></ion-icon>Sign in with Google</ion-button>
+            <ion-button size="large" color="secondary" fill="outline" (click)="loginWithGithub()" expand="block"><ion-icon name="logo-github"></ion-icon>Sign in with Github</ion-button>
+
+            <ion-button size="large" color="secondary" fill="outline" expand="block"
+            [routerLink]="'/authentication'" [queryParams]="{component: 'register'}">No account yet? <b>Sign up</b></ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</form>
