@@ -9,8 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpErrorInterceptor } from './service/http-error.interceptor';
+import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -42,11 +41,6 @@ const firebaseConfig = {
     SplashScreen,
     { provide: RouteReuseStrategy, 
       useClass: IonicRouteStrategy 
-    },
-    {
-        provide: HTTP_INTERCEPTORS,
-        useClass: HttpErrorInterceptor,
-        multi: true
     }
   ],
   bootstrap: [AppComponent]
