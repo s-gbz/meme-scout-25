@@ -2,6 +2,11 @@ ion-checkbox {
     margin-right: 20px;
 }
 
+#RadiuForLogo
+ion-avatar {
+    --border-radius: 50%;
+}
+
 #agreeWithTermsCheckbox {
     font-size: medium;
 }

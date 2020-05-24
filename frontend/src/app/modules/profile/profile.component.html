@@ -1,17 +1,42 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Profile
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content  style="--background: url('/assets/bg_dark.png') no-repeat center/cover fixed;">
+  <form [formGroup]="profileForm" (ngSubmit)="submitProfileFormBio()">
+    <ion-grid>
+      <!-- lines="full" enables full width for all <ion-items> except the checkbox -->
+      <ion-row color="primary" lines="full" class="profile_container">
+        <ion-col size-md="6" size-lg="5" size-xs="12">
+          <div padding>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+            <ion-item style="--background: transparent; --border-color: transparent;">
+              <ion-avatar class="avatar" >
+                <img src="/assets/Logo/avatar.jpg">
+              </ion-avatar>
+            </ion-item>
 
-  Profile!
+            <ion-item class="custom_item" style="--border-radius: 5px; --background: #fff; color:#000;">
+              <ion-input  formControlName="bio" type="text" placeholder="Enter your biography">
+                <ion-icon name="create-outline" class="edit_icon"></ion-icon>
+              </ion-input>
+            </ion-item>
+
+            
+
+            <ion-item class="custom_item" style="--border-radius: 5px; --background:#fff; --color: #000;">
+              <ion-textarea formControlName="aboutme"  rows="8" placeholder="Tell us something about you...">
+                <ion-icon name="create-outline" class="edit_icon"></ion-icon>
+              </ion-textarea>
+            </ion-item>
+
+          </div>
+          <div padding>
+          </div>
+   
+          <ion-button class="custom_button" style="--background:#fff; " shape="round" size="large" type="submit" expand="block">Upload a new meme</ion-button>
+      
+          <ion-button class="custom_button" style="--background:#fff; " shape="round" size="large" type="submit" expand="block">Show my memes</ion-button>
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+  </form>
 </ion-content>
