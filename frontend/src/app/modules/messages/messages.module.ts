@@ -1,16 +1,23 @@
+import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { Tab1Page } from './tab1.page';
+import { Messages } from './messages.component';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
-import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: Messages,
+  }
+];
 
 @NgModule({
   imports: [
     SharedModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule
+    RouterModule.forChild(routes)
   ],
-  declarations: [Tab1Page]
+  declarations: [Messages]
 })
-export class Tab1PageModule {}
+export class MessagesModule {}

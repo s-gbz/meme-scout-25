@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
-import { Tab2Page } from './tab2.page';
+import { MemeView } from './meme-view.component';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
-import { Tab2PageRoutingModule } from './tab2-routing.module';
+import { MemeViewRoutingModule } from './meme-view-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     SharedModule,
     ExploreContainerComponentModule,
-    Tab2PageRoutingModule
+    MemeViewRoutingModule
   ],
-  declarations: [Tab2Page]
+  declarations: [MemeView]
 })
-export class Tab2PageModule {}
+export class MemeViewModule {}

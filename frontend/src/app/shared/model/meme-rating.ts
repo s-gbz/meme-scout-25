@@ -1,4 +1,5 @@
 export interface MemeRating { 
-    id: number;
-    rating: boolean;
+    memeId: number;
+    rating: boolean
+    superLike: boolean;
 }

@@ -19,10 +19,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.createLoginForm();
   }
-
-  userIsLoggedIn() {
-
-  }
   
   createLoginForm() {
     this.loginForm = this.fb.group({
@@ -55,7 +51,6 @@ export class LoginComponent implements OnInit {
   }
 
   private openMemeView() {
-    console.log("TODO adapt & unify route in other PR");
     this.router.navigateByUrl("/tabs");
   }
 

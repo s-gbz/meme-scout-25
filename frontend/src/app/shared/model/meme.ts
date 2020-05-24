@@ -1,5 +1,5 @@
 export interface Meme { 
     id: number;
-    fileBlob: string;
+    fileUrl: string;
     tags: Array<string>;
 }
