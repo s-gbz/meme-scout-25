@@ -24,7 +24,7 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
   }));
 
-  
+  // TODO: Adapt to firebase process
   it('should create', () => {
     expect(component).toBeTruthy();
   });
