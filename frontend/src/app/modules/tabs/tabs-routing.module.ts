@@ -12,8 +12,8 @@ const routes: Routes = [
         loadChildren: () => import('../meme-view/meme-view.module').then(m => m.MemeViewModule)
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'profile',
+        loadChildren: () => import('../profile/profile.module').then(m => m.ProfileModule)
       },
       {
         path: 'messages',
