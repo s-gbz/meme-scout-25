@@ -1,0 +1,44 @@
+ion-checkbox {
+    margin-right: 20px;
+}
+
+#RadiuForLogo
+ion-avatar {
+    --border-radius: 50%;
+}
+
+#agreeWithTermsCheckbox {
+    font-size: medium;
+}
+
+.item-avatar  {     
+    width:100% !important;  
+    height : 100% !important;  
+    max-width: 400px !important;  //any size
+    max-height: 400px !important; //any size 
+}
+
+.custom_button{
+    opacity: 100%;
+    border-radius: 50px;
+    margin: 1em 0;
+    color: #8f8e8d;
+}
+
+.profile_container{
+    justify-content: center;
+}
+
+.edit_icon{
+    position: absolute;
+    right: 0;
+}
+
+.custom_item{
+    margin: 1em 0;
+}
+.avatar {
+    margin: auto;
+    width: 200px;
+    height: 200px;
+}

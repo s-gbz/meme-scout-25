@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/service/user.service';
 import { ToastController } from '@ionic/angular';
 import { Validation } from 'src/app/shared/validation';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'authentication-register',
@@ -13,7 +14,8 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private userService: UserService, public toastController: ToastController) { }
+  constructor(private fb: FormBuilder, private userService: UserService,
+    public toastController: ToastController, private router: Router) { }
 
   ngOnInit() {
     this.createRegisterForm();
@@ -56,12 +58,13 @@ export class RegisterComponent implements OnInit {
 
     Promise.resolve(this.userService.register(name, email)
     // If success -> create / update profile in database
-    .then(() => this.createRegisteredUserInDatabaseAndOpenEditProfile(name, email))
+    .then(() => this.createRegisteredUserInDatabaseAndOpenProfile(name, email))
     .catch((error: Error) => this.handleError(error)));
   }
 
-  private createRegisteredUserInDatabaseAndOpenEditProfile(name: string, email: string) {
-    // TODO: Route user to EditProfile
+  private createRegisteredUserInDatabaseAndOpenProfile(name: string, email: string) {
+    this.router.navigateByUrl("/tabs/profile");
+    // TODO: Update user in DB or write Function
     console.log("createRegisteredUser");
   }
 

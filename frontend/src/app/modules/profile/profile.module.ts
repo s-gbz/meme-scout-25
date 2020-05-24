@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { ProfileComponent } from './profile.component';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-
+import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ProfileComponent,
-  }
+  { path: '', pathMatch: 'full', component: ProfileComponent }
 ];
 
 @NgModule({
+  declarations: [
+    ProfileComponent
+  ],
   imports: [
     SharedModule,
-    ExploreContainerComponentModule,
-    [RouterModule.forChild(routes)]
+    RouterModule.forChild(routes)
   ],
-  declarations: [ProfileComponent]
+  exports: [
+    ProfileComponent
+  ]
 })
-export class ProfileModule {}
+export class ProfileModule { }
