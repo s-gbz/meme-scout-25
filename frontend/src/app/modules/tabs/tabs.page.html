@@ -1,22 +1,15 @@
 <ion-tabs>
-
-  <ion-button [routerLink]="'/authentication'" [queryParams]="{component: 'register'}">REGISTER</ion-button>
-  <ion-button [routerLink]="'/authentication'" [queryParams]="{component: 'login'}">LOGIN</ion-button>
-
   <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="profile">
+      <ion-icon name="person-circle"></ion-icon>
+    </ion-tab-button>
+
     <ion-tab-button tab="meme-view">
-      <ion-icon name="triangle"></ion-icon>
-      <ion-label>Tab 1</ion-label>
+      <ion-icon name="image"></ion-icon>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab2">
-      <ion-icon name="ellipse"></ion-icon>
-      <ion-label>Tab 2</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="tab3">
-      <ion-icon name="square"></ion-icon>
-      <ion-label>Tab 3</ion-label>
+    <ion-tab-button tab="messages">
+      <ion-icon name="chatbubbles"></ion-icon>
     </ion-tab-button>
   </ion-tab-bar>
 
