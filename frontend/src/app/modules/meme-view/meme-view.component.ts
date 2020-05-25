@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MemeService } from 'src/app/service/meme.service';
 import { MemeRating } from 'src/app/shared/model/meme-rating';
 import { Meme } from 'src/app/shared/model/meme';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-meme-view',
@@ -10,8 +11,9 @@ import { Meme } from 'src/app/shared/model/meme';
 })
 export class MemeView implements OnInit {
 
-  availableMemes: Meme[] = [];
+  availableMemes: Meme[];
   private activeMemeIndex: number;
+  memesLoaded: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private memeService: MemeService) { }
 
@@ -27,7 +29,7 @@ export class MemeView implements OnInit {
       }
 
       // this.memeService.rateMeme(meme_rating);
-      this.removeLastMemeAndSetNewActiveMeme();
+      this.removeFirstMemeAndSetNewActiveMeme();
     }
   }
 
@@ -40,30 +42,27 @@ export class MemeView implements OnInit {
       }
 
       // this.memeService.rateMeme(meme_rating);
-      this.removeLastMemeAndSetNewActiveMeme();
+      this.removeFirstMemeAndSetNewActiveMeme();
     }
   }
 
   public memesToViewAvailable(): boolean {
-    return this.activeMemeIndex >= 0;
+    return this.availableMemes.length > 0;
   }
 
-  private removeLastMemeAndSetNewActiveMeme() {
-    console.log(this.activeMemeIndex);
-    this.activeMemeIndex--;
-
-    this.availableMemes.pop();
+  private removeFirstMemeAndSetNewActiveMeme() {
+    this.availableMemes.shift();
   }
 
   private requestNewMemes() {
-    Promise.resolve(this.memeService.getMemes()).then(
+    this.memeService.getMemes().then(
       (newMemes) =>
-       { 
+       {         
          this.availableMemes = newMemes;
-         this.activeMemeIndex = this.availableMemes.length - 1;
+         this.activeMemeIndex = 0;
          console.log(this.availableMemes);
          console.log("index: " + this.activeMemeIndex);
-         
+         this.memesLoaded.next(true);
        }
     );
   }

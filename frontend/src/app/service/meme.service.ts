@@ -18,14 +18,13 @@ export class MemeService {
         const exampleMemeRef = ["tumblr_m2j9xbYh8q1r9pr63o1_500.jpg", "tumblr_m4hrgjTOiS1r9pr63o1_500.jpg", "tumblr_m4tnu5kx2s1qd5giho1_500.jpg", "tumblr_m5yxn0ms7z1r9pr63o1_500.jpg", "tumblr_m893njtVJ81r9pr63o1_500.jpg"]
         const newMemes: Meme[] = [];
 
+        for (let index = 0; index < exampleMemeRef.length; index++) {
+            const memeStoragePath = this.storageRef.refFromURL("gs://meme-scout-25.appspot.com/memes/" + exampleMemeRef[index]);
 
-        exampleMemeRef.forEach(memeRef => {
-            const memeStoragePath = this.storageRef.refFromURL("gs://meme-scout-25.appspot.com/memes/" + memeRef);
-            this.requestNewMeme(memeStoragePath).then(
+            await this.requestNewMeme(memeStoragePath).then(
                 (newMeme) => newMemes.push(newMeme)
             );
-        });
-
+        }
 
         return newMemes;
     }
