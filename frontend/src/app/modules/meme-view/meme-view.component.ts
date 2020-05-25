@@ -60,8 +60,6 @@ export class MemeView implements OnInit {
        {         
          this.availableMemes = newMemes;
          this.activeMemeIndex = 0;
-         console.log(this.availableMemes);
-         console.log("index: " + this.activeMemeIndex);
          this.memesLoaded.next(true);
        }
     );

@@ -54,8 +54,6 @@ export class MemeService {
     }
 
     private createNewMeme(id: string, fileUrl: string, tags?: string[]): Meme {
-        console.log(fileUrl);
-
         return {
             id: id,
             fileUrl: fileUrl,

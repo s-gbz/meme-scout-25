@@ -25,6 +25,5 @@ export class ProfileComponent implements OnInit {
 
   submitProfileFormBio() {
     // TODO: Adapt registration process with API
-    console.log(this.profileForm.value);
   }
 }

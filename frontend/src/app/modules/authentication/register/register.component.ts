@@ -65,7 +65,6 @@ export class RegisterComponent implements OnInit {
   private createRegisteredUserInDatabaseAndOpenProfile(name: string, email: string) {
     this.router.navigateByUrl("/tabs/profile");
     // TODO: Update user in DB or write Function
-    console.log("createRegisteredUser");
   }
 
   private handleError(error: Error) {
