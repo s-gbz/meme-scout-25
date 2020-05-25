@@ -1,37 +1,44 @@
  <form [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
    <ion-grid fixed>
+
+    <ion-item style="--background: transparent; --border-color: transparent; padding-bottom: 30px;">
+      <ion-avatar class="avatar" >
+        <img src="/assets/Logo/meme_scout.png">
+      </ion-avatar>
+    </ion-item>
+
      <!-- lines="full" enables full width for all <ion-items> except the checkbox -->
-     <ion-row color="primary" lines="full" class="ion-justify-content-center">
+     <ion-row color="primary" lines="full" class="profile_container">
        <ion-col size-md="8" size-lg="8" size-xs="12">
-         <h3 class="bold-center">Sign up for a free account</h3>
+         <h3 class="bold-center">Register to swipe memes - not people.</h3>
          <div padding>
 
-           <ion-item>
+           <ion-item class="custom_item">
              <ion-input formControlName="name" type="text" placeholder="Your Name"></ion-input>
            </ion-item>
            <shared-validation-message [inputField]="registerForm.controls.name" [inputName]="'Name'">
            </shared-validation-message>
 
-           <ion-item>
+           <ion-item class="custom_item">
              <ion-input formControlName="email" type="email" placeholder="your@email.com"></ion-input>
            </ion-item>
            <shared-validation-message [inputField]="registerForm.controls.email" [inputName]="'Email'">
            </shared-validation-message>
 
-           <ion-item>
+           <ion-item class="custom_item">
              <ion-input formControlName="password" type="password" placeholder="Create password"></ion-input>
            </ion-item>
            <shared-validation-message [inputField]="registerForm.controls.password" [inputName]="'Create Password'">
            </shared-validation-message>
 
-           <ion-item>
+           <ion-item class="custom_item">
              <ion-input formControlName="confirmPassword" type="password" placeholder="Repeat password"></ion-input>
            </ion-item>
            <shared-validation-message [inputField]="registerForm.controls.confirmPassword"
              [inputName]="'Repeat Password'">
            </shared-validation-message>
 
-           <ion-item text-wrap>
+           <ion-item text-wrap style="--border-radius: 5px; opacity: 80%;" class="custom_policy">
              <ion-checkbox formControlName="agreeWithTerms" checked="false" text-wrap></ion-checkbox>
              <ion-label id="agreeWithTermsCheckbox" text-wrap>I agree with the terms of service and the privacy policy.
              </ion-label>
@@ -42,14 +49,22 @@
 
          </div>
          <div padding>
-           <ion-button size="large" type="submit" [disabled]="registerForm.invalid" expand="block">Sign Up</ion-button>
+           <ion-button style="--background:rgb(66, 69, 85);" shape="round"class="custom_button" size="large" type="submit" [disabled]="registerForm.invalid" expand="block">
+            <ion-label><small>Sign in!</small></ion-label>
+          </ion-button>
            <!-- <ion-button size="large" type="submit" expand="block">Sign Up</ion-button> -->
 
-           <ion-button size="large" color="secondary" fill="outline" (click)="registerWithGoogle()" expand="block"><ion-icon name="logo-google"></ion-icon>Sign up with Google</ion-button>
-           <ion-button size="large" color="secondary" fill="outline" (click)="registerWithGithub()" expand="block"><ion-icon name="logo-github"></ion-icon>Sign up with Github</ion-button>
+           <ion-button style="--background:rgb(66, 69, 85);" shape="round" class="custom_button" size="large" (click)="registerWithGoogle()" expand="block"><ion-icon name="logo-google" class="custom_icon"></ion-icon>
+            <ion-label><small>Sign up with Google</small></ion-label>
+          </ion-button>
 
-           <ion-button size="large" color="secondary" expand="block" [routerLink]="'/authentication'" [queryParams]="{component: 'login'}">Have an account?
-             <b>Sign in</b></ion-button>
+           <ion-button style="--background:rgb(66, 69, 85);" shape="round" class="custom_button" size="large" (click)="registerWithGithub()" expand="block"><ion-icon name="logo-github" class="custom_icon"></ion-icon>
+            <ion-label><small>Sign up with GitHub</small></ion-label>
+          </ion-button>
+
+           <ion-button style="--background:rgb(66, 69, 85);" shape="round" class="custom_button" size="large" expand="block" [routerLink]="'/authentication'" [queryParams]="{component: 'login'}">
+            <ion-label><small>Have an account? Sign in!</small></ion-label>
+          </ion-button>
          </div>
        </ion-col>
      </ion-row>
