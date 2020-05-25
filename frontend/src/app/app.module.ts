@@ -11,8 +11,8 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA5nmeWmR8rhTKjok1KEP6Xi742LAq3JeA",
@@ -33,8 +33,8 @@ const firebaseConfig = {
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireStorageModule 
   ],
   providers: [
     StatusBar,
