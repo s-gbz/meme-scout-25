@@ -12,19 +12,22 @@ export class MemeView implements OnInit {
 
   memes: Meme[];
 
-  constructor(private memeService : MemeService) {}
-
-  ngOnInit(){
-    /*this.memeService.getMemes(null).subscribe(
-      newMemes => {
-        this.memes = newMemes;
-      }
-    );*/
+  constructor(private memeService: MemeService) { }
+    
+  ngOnInit() {
+    this.requestNewMemes();
   }
 
-  likeMeme(){
+  likeMeme() {
     alert("Liked/Disliked meme");
-    
+
     // this.memeService.rateMeme(meme_rating);
+  }
+
+  private requestNewMemes() {
+    Promise.resolve(this.memeService.getMemes()).then(
+      (newMemes) =>
+        this.memes = newMemes
+    );
   }
 }
