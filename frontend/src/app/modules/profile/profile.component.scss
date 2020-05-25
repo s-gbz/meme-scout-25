@@ -19,26 +19,37 @@ ion-avatar {
 }
 
 .custom_button{
-    opacity: 100%;
+    opacity: 80%;
     border-radius: 50px;
     margin: 1em 0;
-    color: #8f8e8d;
+    fill: clear;
+    --background-hover: #c39cd7;
+    --min-width: 10em;
 }
 
 .profile_container{
     justify-content: center;
 }
 
-.edit_icon{
-    position: absolute;
-    right: 0;
-}
-
 .custom_item{
     margin: 1em 0;
+    opacity: 90%;
+    --background-hover-opacity: true;
+    --ion-color-danger-shade: #c39cd7;
+    --ion-color-danger-tint: #c39cd7;
+    --ion-color-danger: #c39cd7;
+    --ion-color-success: #9fdee9;
 }
+
 .avatar {
     margin: auto;
     width: 200px;
     height: 200px;
+}
+
+.custom-icon {
+    --slot: "icon-only";
+    position: absolute;
+    right: 0;
+    background: transparent;
 }
