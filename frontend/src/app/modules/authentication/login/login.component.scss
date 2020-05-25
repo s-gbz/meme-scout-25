@@ -1,0 +1,37 @@
+.item-avatar  {     
+    width:100% !important;  
+    height : 100% !important;  
+    max-width: 400px !important;  //any size
+    max-height: 400px !important; //any size 
+}
+
+.avatar {
+    margin: auto;
+    width: 190px;
+    height: 190px;
+}
+
+.custom_button{
+    opacity: 80%;
+    border-radius: 50px;
+    margin: 0.5em 0;
+    fill: clear;
+    --background-hover: #c39cd7;
+    --min-width: 10em;
+}
+
+.custom_item{
+    margin: 0.1em 0;
+    opacity: 90%;
+    --background-hover-opacity: true;
+    --ion-color-danger-shade: #c39cd7;
+    --ion-color-danger-tint: #c39cd7;
+    --ion-color-danger: #c39cd7;
+    --ion-color-success: #9fdee9;
+    --border-radius: 5px;
+    padding-bottom: 2px;
+}
+
+.custom_icon {
+    padding-right: 5px;
+}
