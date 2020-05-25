@@ -23,22 +23,26 @@ export class UserService {
 
   public register(email: string, password: string): Promise<any> {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
-      .then((user: auth.UserCredential) => this.authenticateUser(user));
+      .then((user: auth.UserCredential) => this.authenticateUser(user))
+      .catch(error => this.handleError(error));
   }
 
   public login(email: string, password: string): Promise<any> {
     return this.afAuth.signInWithEmailAndPassword(email, password)
-      .then((user: auth.UserCredential) => this.authenticateUser(user));
+      .then((user: auth.UserCredential) => this.authenticateUser(user))
+      .catch(error => this.handleError(error));
   }
 
   public loginWithGoogle(): Promise<any> {
     return this.afAuth.signInWithPopup(new auth.GoogleAuthProvider)
-      .then((user: auth.UserCredential) => this.authenticateUser(user));
+      .then((user: auth.UserCredential) => this.authenticateUser(user))
+      .catch(error => this.handleError(error));
   }
 
   public loginWithGithub(): Promise<any> {
     return this.afAuth.signInWithPopup(new auth.GithubAuthProvider)
-    .then((user: auth.UserCredential) => this.authenticateUser(user));
+    .then((user: auth.UserCredential) => this.authenticateUser(user))
+    .catch(error => this.handleError(error));
   }
 
   public async logout() {
@@ -74,5 +78,9 @@ export class UserService {
       });
 
     return emailIsAvailable;
+  }
+
+  private handleError(error) {
+    console.error(error);
   }
 }

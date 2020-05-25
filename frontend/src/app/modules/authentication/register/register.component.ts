@@ -56,6 +56,8 @@ export class RegisterComponent implements OnInit {
     const name = this.registerForm.value["name"].trim();
     const email = this.registerForm.value["email"].trim();
 
+    console.log(name + " " + email);
+    
     Promise.resolve(this.userService.register(name, email)
     // If success -> create / update profile in database
     .then(() => this.createRegisteredUserInDatabaseAndOpenProfile(name, email))
