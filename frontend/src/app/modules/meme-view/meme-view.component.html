@@ -8,31 +8,49 @@
 
 <ion-content>
   <ion-grid fixed>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size-md="6" size-lg="6" size-xs="12">
-        <div>
-          <ion-img src="assets/memescout25.jpg"></ion-img>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size-md="2" size-lg="2" size-xs="4">
-        <div>
-          <ion-button (click)="likeMeme()" color="light" size="large" expand="full">Dislike</ion-button>
-        </div>
-      </ion-col>
-      <ion-col size-md="2" size-lg="2" size-xs="4">
-        <div>
-          <ion-button (click)="likeMeme()" color="dark" size="large" expand="full">Like</ion-button>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size-md="0.5" size-lg="0.5" size-xs="1">
-        <div>
-          <img src="assets/favorite_icon.png" (click)="likeMeme()" />
-        </div>
-      </ion-col>
-    </ion-row>
+    <div *ngIf="memesToViewAvailable(); else noMemesAvailable">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size-md="6" size-lg="6" size-xs="12">
+          <div>
+            <ion-img src="availableMemes[activeMemeIndex].fileUrl"></ion-img>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col size-md="2" size-lg="2" size-xs="4">
+          <div>
+            <ion-button (click)="likeMeme(false)" color="light" size="large" expand="full">Dislike</ion-button>
+          </div>
+        </ion-col>
+        <ion-col size-md="2" size-lg="2" size-xs="4">
+          <div>
+            <ion-button (click)="likeMeme(true)" color="dark" size="large" expand="full">Like</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col size-md="0.5" size-lg="0.5" size-xs="1">
+          <div>
+            <img src="assets/favorite_icon.png" (click)="likeMeme()" />
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <ng-template #noMemesAvailable>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size-md="6" size-lg="6" size-xs="12">
+          <div>
+            <p><b>No more memes available.</b></p>
+            <p>Sorry! Looks like you swiped them all for today¯\_(ツ)_/¯</p>
+            <ion-img src="assets/memescout25.jpg"></ion-img>
+            <!-- <ion-img src="assets/memescout25.jpg"></ion-img> -->
+          </div>
+        </ion-col>
+      </ion-row>
+    </ng-template>
+
   </ion-grid>
 </ion-content>

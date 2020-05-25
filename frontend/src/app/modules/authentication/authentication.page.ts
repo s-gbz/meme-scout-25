@@ -20,7 +20,6 @@ export class AuthenticationPage implements OnInit {
   subscribeAndSwitchToRequestedAuthenticationComponent() {
     this.route.queryParams.subscribe((authComponent: Params) => {
       this.authenticationComponent = authComponent['component'];
-      console.log(this.authenticationComponent);
     });
   }
 }
