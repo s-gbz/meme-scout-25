@@ -12,7 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 export class MemeView implements OnInit {
 
   availableMemes: Meme[];
-  private activeMemeIndex: number;
+  activeMemeIndex: number;
   memesLoaded: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private memeService: MemeService) { }
