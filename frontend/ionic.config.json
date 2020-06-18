@@ -1,7 +1,0 @@
-{
-  "name": "memeScout25",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
