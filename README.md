@@ -1,5 +1,5 @@
 # Verwendete Technologien
-- Frontend: Angular
+- Frontend: Ionic mit Angular
 - Backend: Go
 - Versionsverwaltung: Git/ GitHub
 - Datenbank: Firebase
@@ -7,7 +7,7 @@
 - Verwendete Konzepte: Clean Code
 
 # Git Workflow
-- master -> Immer lauffähig. Repräsentiert den aktuellen Release.
+- master -> Immer lauffähig. Repräsentiert den aktuellen Release und den letzten Sprint.
 - developer -> (Bitte gerne :D) Lauffähiger default branch. Verwendet für Abzweigungen der PRs.
 - Arbeit mit Pull Requests -> Keine direkten Commits auf den Branch -> Mit Bestätigung eines Reviewers kann in developer gemergt werden.
 

@@ -1,0 +1,13 @@
+<ion-content style="--background: url('/assets/bg_dark.png') no-repeat center/cover;">
+    <ion-grid>
+        <ion-row >
+            <ion-col>
+                <div [ngSwitch]="authenticationComponent">
+                    <authentication-register *ngSwitchCase="'register'"></authentication-register>
+                    <authentication-login *ngSwitchCase="'login'"></authentication-login>
+                    <authentication-login *ngSwitchDefault></authentication-login>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

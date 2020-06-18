@@ -1,0 +1,6 @@
+<div class="invalid-message" *ngIf="inputField && inputField.touched && inputField.errors">
+  <div *ngIf="inputField.errors.required"><span *ngIf="inputName">{{inputName}}</span> is required.</div>
+  <div *ngIf="inputField.errors.minlength"><span *ngIf="inputName">{{inputName}}</span> must be at least {{inputField.errors.minlength.requiredLength}} characters long.</div>
+  <div *ngIf="inputField.errors.email">A valid email like "an@email.com" is required.</div>
+  <div *ngIf="inputField.errors.PasswordsDontMatch && inputField.touched">Passwords don't match.</div>
+</div>

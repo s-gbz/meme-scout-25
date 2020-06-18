@@ -1,0 +1,46 @@
+<ion-content  style="--background: url('/assets/bg_dark.png') no-repeat center/cover;">
+  <form [formGroup]="profileForm" (ngSubmit)="submitProfileFormBio()">
+    <ion-grid>
+      <!-- lines="full" enables full width for all <ion-items> except the checkbox -->
+      <ion-row color="primary" lines="full" class="profile_container">
+        <ion-col size-md="6" size-lg="5" size-xs="12">
+          <div padding>
+
+            <ion-item style="--background: transparent; --border-color: transparent;">
+              <ion-avatar class="avatar" >
+                <img src="/assets/Logo/avatar.png">
+              </ion-avatar>
+            </ion-item>
+
+            <ion-item class="custom_item" style="--border-radius: 5px; --background: rgb(66, 69, 85); color:#fff;">
+              <ion-input  formControlName="bio" type="text" placeholder="Enter your biography">
+                  <ion-icon name="create-outline" style="color: #ffffff;" class="custom-icon"></ion-icon>
+              </ion-input>
+            </ion-item>
+
+            
+
+            <ion-item class="custom_item" style="--border-radius: 5px; --background:rgb(66, 69, 85); --color: #fff;">
+              <ion-textarea formControlName="aboutme"  rows="8" placeholder="Tell us something about you...">
+                  <ion-icon name="create-outline" style="color: #ffffff" class="custom-icon"></ion-icon>
+              </ion-textarea>
+            </ion-item>
+
+          </div>
+          <div padding>
+          </div>
+
+          <ion-button class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large" type="submit" expand="block">
+            <ion-label><small>Upload a new meme</small></ion-label>
+          </ion-button>
+      
+          <ion-button class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large" type="submit" expand="block">
+            <ion-label><small>Show my memes</small></ion-label>
+          </ion-button>
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+  </form>
+</ion-content>
