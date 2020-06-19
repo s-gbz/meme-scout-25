@@ -5,9 +5,12 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 import { UrlConfig } from '../url.config';
 import { auth } from 'firebase';
+import * as firebase from 'firebase';
+import { UserProfile } from '../shared/model/user-profile';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +21,8 @@ export class UserService {
   authStatus = new BehaviorSubject<firebase.User>(null);
   authenticatedUser: firebase.User;
 
-  constructor(private http: HttpClient, private afAuth: AngularFireAuth) { }
+
+  constructor(private http: HttpClient, private afAuth: AngularFireAuth, private afDatabase: AngularFireDatabase) { }
 
 
   public register(email: string, password: string): Promise<any> {
@@ -56,14 +60,18 @@ export class UserService {
     this.authenticatedUser = user.user;
   }
 
-  // TODO: Switch to Firebase
-  public getProfile(userId: number): Observable<User> {
-    return this.http.post<User>(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_PROFILE, userId);
+  // // TODO: Switch to Firebase
+  // public getProfile(userId: number): Observable<User> {
+  //   return this.http.post<User>(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_PROFILE, userId);
+  // }
+
+  public getProfile(): Observable<any> {    
+    return this.afDatabase.object(`users/${this.authenticatedUser.uid}`).valueChanges();
   }
 
-  // TODO: Switch to Firebase
-  public updateProfile(updatedProfile: User): Observable<number> {
-    return this.http.post<number>(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_PROFILE_EDIT, updatedProfile);
+  public updateProfile(updatedProfile: UserProfile) {
+    this.afDatabase.object(`users/${this.authenticatedUser.uid}`).update(updatedProfile).then(_ => console.log('Profile update successful'))
+    .catch(err => console.log(err, 'You dont have access!'));
   }
 
   // Unused as of right now
