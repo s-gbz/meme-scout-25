@@ -1,5 +1,5 @@
 <ion-content  style="--background: url('/assets/bg_dark.png') no-repeat center/cover;">
-  <form [formGroup]="profileForm" (ngSubmit)="submitProfileFormBio()">
+  <form [formGroup]="userProfileForm">
     <ion-grid>
       <!-- lines="full" enables full width for all <ion-items> except the checkbox -->
       <ion-row color="primary" lines="full" class="profile_container">
@@ -22,7 +22,19 @@
             
 
             <ion-item class="custom_item" style="--border-radius: 5px; --background:rgb(66, 69, 85); --color: #fff;">
-              <ion-textarea formControlName="aboutMe"  rows="8" placeholder="Tell us something about you...">
+              <ion-textarea formControlName="fact1" rows="1" placeholder="fact 1">
+                  <ion-icon name="create-outline" style="color: #ffffff" class="custom-icon"></ion-icon>
+              </ion-textarea>
+            </ion-item>
+
+            <ion-item class="custom_item" style="--border-radius: 5px; --background:rgb(66, 69, 85); --color: #fff;">
+              <ion-textarea formControlName="fact2" rows="1" placeholder="fact 2">
+                  <ion-icon name="create-outline" style="color: #ffffff" class="custom-icon"></ion-icon>
+              </ion-textarea>
+            </ion-item>
+
+            <ion-item class="custom_item" style="--border-radius: 5px; --background:rgb(66, 69, 85); --color: #fff;">
+              <ion-textarea formControlName="fact3" rows="1" placeholder="fact 3">
                   <ion-icon name="create-outline" style="color: #ffffff" class="custom-icon"></ion-icon>
               </ion-textarea>
             </ion-item>
@@ -31,7 +43,8 @@
           <div padding>
           </div>
 
-          <ion-button *ngIf="profileForm.valid && profileForm.touched" class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large" type="submit" expand="block">
+          <!-- *ngIf="userProfileForm.valid && userProfileForm.touched" -->
+          <ion-button (click)="updatetUserProfile()" class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large" type="submit" expand="block">
             <ion-label><small>Update profile</small></ion-label>
           </ion-button>
 

@@ -11,37 +11,42 @@ import { UserProfile } from '../../shared/model/user-profile';
 })
 export class ProfileComponent implements OnInit {
 
-  profileForm: FormGroup;
-  profile$: Observable<UserProfile>;
+  userProfileForm: FormGroup;
   activeProfile: UserProfile = null;
 
   constructor(private fb: FormBuilder, private userService: UserService) { }
 
   ngOnInit() {
-    this.createProfileForm();
+    this.initializeUserProfileForm();
 
-    let profile$ = this.userService.getProfile().subscribe(
+    this.userService.getProfile().subscribe(
       profile => {
         this.activeProfile = profile;
-        console.log(this.activeProfile);
-        this.profileForm.controls["biography"].setValue(this.activeProfile.biography);
-        const factStringTest = "- " + this.activeProfile.fact1 + "\n- " + this.activeProfile.fact2 + "\n- " + this.activeProfile.fact3;
-        this.profileForm.controls["aboutMe"].setValue(factStringTest);
+        this.updateProfileFormValues();
       }
     );
   }
   
-  createProfileForm() {
-    this.profileForm = this.fb.group({
+  initializeUserProfileForm() {
+    this.userProfileForm = this.fb.group({
       biography: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      aboutMe: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
+      fact1: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      fact2: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      fact3: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     })
   }
 
-  submitProfileFormBio() {
-    // TODO: Adapt registration process with API
-    console.log(this.profileForm.value);
+  updatetUserProfile() {
+    console.log(this.userProfileForm.value);
   
-    this.userService.updateProfile(this.profileForm.value);
+    this.userService.updateProfile(this.userProfileForm.value);
+  }
+
+  private updateProfileFormValues() {
+    this.userProfileForm.controls["biography"].setValue(this.activeProfile.biography);
+    this.userProfileForm.controls["fact1"].setValue(this.activeProfile.fact1);
+    this.userProfileForm.controls["fact2"].setValue(this.activeProfile.fact2);
+    this.userProfileForm.controls["fact3"].setValue(this.activeProfile.fact3);
   }
 }
