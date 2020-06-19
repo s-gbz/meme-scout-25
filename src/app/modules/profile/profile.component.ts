@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/service/user.service';
 import { UserProfile } from '../../shared/model/user-profile';
+import { MemeService } from 'src/app/service/meme.service';
 
 @Component({
   selector: 'profile',
@@ -12,8 +13,9 @@ export class ProfileComponent implements OnInit {
 
   userProfileForm: FormGroup;
   activeProfile: UserProfile = null;
+  fileToUpload: File = null;
 
-  constructor(private fb: FormBuilder, private userService: UserService) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private memeService: MemeService) { }
 
   ngOnInit() {
     this.initializeUserProfileForm();
@@ -44,6 +46,14 @@ export class ProfileComponent implements OnInit {
 
   updatetUserProfile() {  
     this.userService.updateProfile(this.userProfileForm.value);
+  }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+  }
+
+  uploadMeme() {
+    this.memeService.uploadMemes(["memeScout25"], [this.fileToUpload]);
   }
 
   handleProfilePictureUpload(event) {

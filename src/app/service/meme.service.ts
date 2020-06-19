@@ -33,12 +33,20 @@ export class MemeService {
         // TODO: Adapt to new backend Function;
     }
 
+    public uploadSingleMeme(filePath: string) {
+        const path = "memes/" + "testMeme";
+        // const file = new File();
+
+        // this.afStore.upload(path, file);
+
+    }
+
     public uploadMemes(memeIds: string[], files: File[]) {
         const path = "memes/" + memeIds[0];
         const file = files[0];
 
-        this.afStore.upload(path, file);
-
+        this.afStore.upload(path, file).then(_ => console.log('Meme upload successful'))
+        .catch(err => console.log(err, 'Meme upload failed'));
     }
     
 
