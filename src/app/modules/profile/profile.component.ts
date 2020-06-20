@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/service/user.service';
-import { Observable } from 'rxjs';
 import { UserProfile } from '../../shared/model/user-profile';
 
 @Component({
@@ -41,6 +40,12 @@ export class ProfileComponent implements OnInit {
     console.log(this.userProfileForm.value);
   
     this.userService.updateProfile(this.userProfileForm.value);
+  }
+
+  handleProfilePictureUpload(file: File) {
+    // Upload picture
+    // Get url and set as active profile picture
+    // this.activeProfile.profilePictureUrl
   }
 
   private updateProfileFormValues() {

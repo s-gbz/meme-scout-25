@@ -1,0 +1,71 @@
+{
+  "likedMemes" : {
+    "WL76brVSuhQpnzbFeVlu5I6wlL02" : [ "tumblr_m0reimCzOL1qj26eao1_500.jpg", "tumblr_m893njtVJ81r9pr63o1_500.jpg" ],
+    "testUid2" : [ "tumblr_m4tnu5kx2s1qd5giho1_500.jpg", "tumblr_m0cawrU62O1qaaowno1_500.jpg" ]
+  },
+  "matchingPreferences" : {
+    "WL76brVSuhQpnzbFeVlu5I6wlL02" : {
+      "ownGender" : "male",
+      "preferedGender" : "female"
+    },
+    "testUid2" : {
+      "ownGender" : "female",
+      "preferedGender" : "male"
+    }
+  },
+  "uploadedMemes" : {
+    "WL76brVSuhQpnzbFeVlu5I6wlL02" : [ "tumblr_m4tnu5kx2s1qd5giho1_500.jpg", "tumblr_m0cawrU62O1qaaowno1_500.jpg" ],
+    "testUid2" : [ "tumblr_m0reimCzOL1qj26eao1_500.jpg", "tumblr_m893njtVJ81r9pr63o1_500.jpg" ]
+  },
+  "users" : {
+    "WL76brVSuhQpnzbFeVlu5I6wlL02" : {
+      "biography" : "I like trains <3!!",
+      "fact1" : "Sports",
+      "fact2" : "Dogs",
+      "fact3" : "Cinema",
+      "name" : "Max Mustermann",
+      "profilePictureUrl" : "https://comps.gograph.com/cool-indian-dude_gg61063622.jpg",
+      "matches" : ["testMatch1"]
+    },
+    "testUid2" : {
+      "biography" : "Out for the good memes.",
+      "fact1" : "Sports",
+      "fact2" : "Cats",
+      "fact3" : "Book",
+      "name" : "Franka Testfrau",
+      "profilePictureUrl" : "https://www.publicdomainpictures.net/pictures/250000/velka/woman-green-eyes-portrait.jpg",
+      "matches" : ["testMatch1"]
+    },
+    "zRVV3191zYYNJK9Q4zRveYuSIcD3" : {
+      "biography" : "Surf, love, live.",
+      "fact1" : "Surfing",
+      "fact2" : "Movies",
+      "fact3" : "Music",
+      "name" : "",
+      "matches" : []
+    }
+  },
+  "matches" : {
+    "testMatch1" : {
+      "user1" : "WL76brVSuhQpnzbFeVlu5I6wlL02",
+      "user2" : "testUid2",
+      "dateOfMatch" : "1592657580022"
+    }
+  },
+  "messages" : {
+    "testMatch1" : {
+      "messageUid1" : {
+        "sender" : "WL76brVSuhQpnzbFeVlu5I6wlL02",
+        "recipient" : "testUid2",
+        "messageContent" : "Hi there!",
+        "timestamp" : "1592657728116"
+      },
+      "messageUid2" : {
+        "sender" : "testUid2",
+        "recipient" : "WL76brVSuhQpnzbFeVlu5I6wlL02",
+        "messageContent" : "Hi :)",
+        "timestamp" : "1592657957094"
+      }
+    }
+  }
+}
