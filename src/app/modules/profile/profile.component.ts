@@ -42,10 +42,29 @@ export class ProfileComponent implements OnInit {
     this.userService.updateProfile(this.userProfileForm.value);
   }
 
-  handleProfilePictureUpload(file: File) {
+  handleProfilePictureUpload(event) {
     // Upload picture
-    // Get url and set as active profile picture
-    // this.activeProfile.profilePictureUrl
+    // console.log(newProfilePicture);
+    const newProfilePicture = event.target.files[0];
+
+    // this.userService.uploadProfilePicture(newProfilePicture).subscribe(
+    //   profilePictureUrl => {
+    //   // Get url and set as active profile picture
+    //     this.updateProfilePictureUrl(profilePictureUrl)
+    //   });
+    this.userService.uploadSingleProfilePicture(newProfilePicture)
+    // .subscribe(
+    //   profilePictureUrl => {
+    //       // Get url and set as active profile picture
+    //       console.log(profilePictureUrl.downloadURL);
+          
+    //         this.updateProfilePictureUrl(profilePictureUrl.task.snapshot.downloadURL)
+    //       });
+  }
+
+  private updateProfilePictureUrl(profilePictureUrl: string) {
+    this.activeProfile.profilePictureUrl = profilePictureUrl;
+    this.userService.updateProfile(this.activeProfile);
   }
 
   private updateProfileFormValues() {

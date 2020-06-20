@@ -40,6 +40,7 @@ export class MemeService {
         this.afStore.upload(path, file);
 
     }
+    
 
     private async requestNewMeme(memeStoragePath: firebase.storage.Reference) {
         let newMeme: Meme;
