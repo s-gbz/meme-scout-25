@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
 
     this.userService.getProfile().subscribe(
       profile => {
-        if(profile === null) {
+        if (profile === null) {
           this.activeProfile = this.userProfileForm.value;
           this.setDefaultProfilePicture();
           this.updatetUserProfile();
@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
-  
+
   initializeUserProfileForm() {
     this.userProfileForm = this.fb.group({
       biography: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  updatetUserProfile() {  
+  updatetUserProfile() {
     this.userService.updateProfile(this.userProfileForm.value);
   }
 
@@ -60,12 +60,29 @@ export class ProfileComponent implements OnInit {
     this.userService.uploadProfilePictureAndUpdateDatabaseEntry(event.target.files[0], this.activeProfile);
   }
 
+  public getUserUploadedMemes() {
+    this.memeService.getUserUploadedMemeReferences().subscribe(
+      memeReferenceArrays => {
+        const memeReferences = [];
+
+        for (let i = 0; i < memeReferenceArrays.length; i++) {
+          const singleMemeReferenceArray = <Array<any>>memeReferenceArrays[i];
+
+          for (let j = 0; j < singleMemeReferenceArray.length; j++) {
+            memeReferences.push(singleMemeReferenceArray[j]);
+          };
+        }
+
+        this.memeService.getUserUploadedMemesByReference(memeReferences);
+      });
+  }
+
   logoutUser() {
     this.userService.logout();
   }
 
   private setDefaultProfilePicture() {
-      this.activeProfile.profilePictureUrl = "/assets/happy-smile.svg";
+    this.activeProfile.profilePictureUrl = "/assets/happy-smile.svg";
   }
 
   private updateProfileFormValues() {

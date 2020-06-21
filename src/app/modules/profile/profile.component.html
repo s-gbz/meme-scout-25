@@ -76,7 +76,7 @@
           </ion-button>
           <input (change)="uploadMeme($event)" type="file" id="memeUpload" #memeUpload hidden="true" multiple accept=".png, .jpg, .jpeg, .svg">
 
-          <ion-button class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large"
+          <ion-button (click)="getUserUploadedMemes()" class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large"
             type="submit" expand="block">
             <ion-label><small>Show my memes</small></ion-label>
           </ion-button>

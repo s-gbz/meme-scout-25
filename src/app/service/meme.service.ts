@@ -59,6 +59,16 @@ export class MemeService {
             .catch(err => console.log(err, 'UploadedMemes push failed'));
     }
 
+    public getUserUploadedMemeReferences() {
+        const uid = this.userService.getAuthenticatedUser().uid;
+
+        return this.afDatabase.list(`uploadedMemes/${uid}`).valueChanges();
+    }
+
+    public getUserUploadedMemesByReference(memeReferences) {
+        console.log("all values: " + memeReferences);
+        // this.afStore.ref(memeReferences[0]).getDownloadURL().subscribe()
+    }
 
     private async requestNewMeme(memeStoragePath: firebase.storage.Reference) {
         let newMeme: Meme;
