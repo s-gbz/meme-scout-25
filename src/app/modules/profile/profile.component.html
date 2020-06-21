@@ -1,28 +1,55 @@
-<ion-content  style="--background: url('/assets/bg_dark.png') no-repeat center/cover;">
-  <form [formGroup]="profileForm" (ngSubmit)="submitProfileFormBio()">
+<ion-content style="--background: url('/assets/bg_dark.png') no-repeat center/cover;">
+  <form [formGroup]="userProfileForm">
     <ion-grid>
       <!-- lines="full" enables full width for all <ion-items> except the checkbox -->
       <ion-row color="primary" lines="full" class="profile_container">
         <ion-col size-md="6" size-lg="5" size-xs="12">
           <div padding>
 
+           <!-- Check on mobile device if <ion-item> can be removed -->
             <ion-item style="--background: transparent; --border-color: transparent;">
-              <ion-avatar class="avatar" >
-                <img src="/assets/Logo/avatar.png">
-              </ion-avatar>
+              <div class="profilePictureContainer">
+                <div class="outer">
+                  <img id="profilePicture" *ngIf="activeProfile != null" src={{activeProfile.profilePictureUrl}}>
+                  <div class="inner">
+                    <input class="inputfile" type="file" (change)="handleProfilePictureUpload($event)" accept=".png, .jpg, .jpeg, .svg">
+                    <label><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
+                        <path
+                          d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z">
+                        </path>
+                      </svg></label>
+                  </div>
+                </div>
+              </div>
             </ion-item>
 
             <ion-item class="custom_item" style="--border-radius: 5px; --background: rgb(66, 69, 85); color:#fff;">
-              <ion-input  formControlName="bio" type="text" placeholder="Enter your biography">
-                  <ion-icon name="create-outline" style="color: #ffffff;" class="custom-icon"></ion-icon>
+              <ion-input formControlName="name" type="text" placeholder="Hi! My name is">
+                <ion-icon name="create-outline" style="color: #ffffff;" class="custom-icon"></ion-icon>
               </ion-input>
             </ion-item>
 
-            
+            <ion-item class="custom_item" style="--border-radius: 5px; --background: rgb(66, 69, 85); color:#fff;">
+              <ion-input formControlName="biography" type="text" placeholder="This is me in one sentence.">
+                <ion-icon name="create-outline" style="color: #ffffff;" class="custom-icon"></ion-icon>
+              </ion-input>
+            </ion-item>
 
             <ion-item class="custom_item" style="--border-radius: 5px; --background:rgb(66, 69, 85); --color: #fff;">
-              <ion-textarea formControlName="aboutme"  rows="8" placeholder="Tell us something about you...">
-                  <ion-icon name="create-outline" style="color: #ffffff" class="custom-icon"></ion-icon>
+              <ion-textarea formControlName="fact1" rows="1" placeholder="Fact 1 about me">
+                <ion-icon name="create-outline" style="color: #ffffff" class="custom-icon"></ion-icon>
+              </ion-textarea>
+            </ion-item>
+
+            <ion-item class="custom_item" style="--border-radius: 5px; --background:rgb(66, 69, 85); --color: #fff;">
+              <ion-textarea formControlName="fact2" rows="1" placeholder="Fact 2 about me">
+                <ion-icon name="create-outline" style="color: #ffffff" class="custom-icon"></ion-icon>
+              </ion-textarea>
+            </ion-item>
+
+            <ion-item class="custom_item" style="--border-radius: 5px; --background:rgb(66, 69, 85); --color: #fff;">
+              <ion-textarea formControlName="fact3" rows="1" placeholder="Fact 3 about me">
+                <ion-icon name="create-outline" style="color: #ffffff" class="custom-icon"></ion-icon>
               </ion-textarea>
             </ion-item>
 
@@ -30,13 +57,25 @@
           <div padding>
           </div>
 
-          <ion-button class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large" type="submit" expand="block">
+          <ion-button (click)="updatetUserProfile()" class="custom_button" style="--background:rgb(66, 69, 85); "
+            shape="round" size="large" type="submit" expand="block">
+            <ion-label><small>Update profile</small></ion-label>
+          </ion-button>
+
+          <ion-button class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large"
+            type="submit" expand="block">
             <ion-label><small>Upload a new meme</small></ion-label>
           </ion-button>
-      
-          <ion-button class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large" type="submit" expand="block">
+
+          <ion-button class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large"
+            type="submit" expand="block">
             <ion-label><small>Show my memes</small></ion-label>
           </ion-button>
+
+          <ion-button (click)="logoutUser()" color="danger" class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large"
+          type="submit" expand="block">
+          <ion-label><small>Logout</small></ion-label>
+        </ion-button>
         </ion-col>
 
       </ion-row>

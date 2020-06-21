@@ -2,8 +2,7 @@ ion-checkbox {
     margin-right: 20px;
 }
 
-#RadiuForLogo
-ion-avatar {
+#RadiuForLogo ion-avatar {
     --border-radius: 50%;
 }
 
@@ -11,14 +10,74 @@ ion-avatar {
     font-size: medium;
 }
 
-.item-avatar  {     
-    width:100% !important;  
-    height : 100% !important;  
-    max-width: 400px !important;  //any size
-    max-height: 400px !important; //any size 
+.profilePictureContainer {
+    // .container width/ height is responsible for final size of profile picture
+    width: 250px;
+    height: 250px;
+    display: block;
+    margin: 0 auto;
 }
 
-.custom_button{
+.outer {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 400px !important;
+    max-height: 400px !important;
+    margin: auto;
+    // background-color: #6eafd4;
+    border-radius: 100%;
+    position: relative;
+}
+
+#profilePicture {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 400px !important;
+    max-height: 400px !important;
+    margin: auto;
+    border-radius: 100%;
+    position: relative;
+    border-radius: 50%;
+}
+
+.inner {
+    background-color: #fe1424;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.inner:hover {
+    background-color: #5555ff;
+}
+.inputfile {
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: 1;
+    width: 50px;
+    height: 50px;
+}
+.inputfile + label {
+    font-size: 1.25rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    pointer-events: none;
+    cursor: pointer;
+    line-height: 50px;
+    text-align: center;
+}
+.inputfile + label svg {
+    fill: #fff;
+}
+.custom_button {
     opacity: 80%;
     border-radius: 50px;
     margin: 1em 0;
@@ -27,11 +86,11 @@ ion-avatar {
     --min-width: 10em;
 }
 
-.profile_container{
+.profile_container {
     justify-content: center;
 }
 
-.custom_item{
+.custom_item {
     margin: 1em 0;
     opacity: 90%;
     --background-hover-opacity: true;

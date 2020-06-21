@@ -2,12 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../shared/model/user';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, finalize } from 'rxjs/operators';
 
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 import { UrlConfig } from '../url.config';
 import { auth } from 'firebase';
+import { UserProfile } from '../shared/model/user-profile';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,38 +21,46 @@ export class UserService {
 
   authStatus = new BehaviorSubject<firebase.User>(null);
   authenticatedUser: firebase.User;
+  private storageRef = this.afStore.storage;
 
-  constructor(private http: HttpClient, private afAuth: AngularFireAuth) { }
+
+  constructor(private http: HttpClient,
+    private router: Router,
+    private afAuth: AngularFireAuth, 
+    private afDatabase: AngularFireDatabase, 
+    private afStore: AngularFireStorage) { }
 
 
   public register(email: string, password: string): Promise<any> {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((user: auth.UserCredential) => this.authenticateUser(user))
-      .catch(error => this.handleError(error));
+      .catch(error => console.error(error));
   }
 
   public login(email: string, password: string): Promise<any> {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((user: auth.UserCredential) => this.authenticateUser(user))
-      .catch(error => this.handleError(error));
+      .catch(error => console.error(error));
   }
 
   public loginWithGoogle(): Promise<any> {
     return this.afAuth.signInWithPopup(new auth.GoogleAuthProvider)
       .then((user: auth.UserCredential) => this.authenticateUser(user))
-      .catch(error => this.handleError(error));
+      .catch(error => console.error(error));
   }
 
   public loginWithGithub(): Promise<any> {
     return this.afAuth.signInWithPopup(new auth.GithubAuthProvider)
-    .then((user: auth.UserCredential) => this.authenticateUser(user))
-    .catch(error => this.handleError(error));
+      .then((user: auth.UserCredential) => this.authenticateUser(user))
+      .catch(error => console.error(error));
   }
 
   public async logout() {
     await this.afAuth.signOut();
     this.authStatus.next(null);
     this.authenticatedUser = null;
+    console.log("Logout successful");
+    this.router.navigateByUrl("/authentication");
   }
 
   private authenticateUser(user: auth.UserCredential) {
@@ -56,14 +68,43 @@ export class UserService {
     this.authenticatedUser = user.user;
   }
 
-  // TODO: Switch to Firebase
-  public getProfile(userId: number): Observable<User> {
-    return this.http.post<User>(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_PROFILE, userId);
+  public getProfile(): Observable<any> {
+    return this.afDatabase.object(`users/${this.authenticatedUser.uid}`).valueChanges();
   }
 
-  // TODO: Switch to Firebase
-  public updateProfile(updatedProfile: User): Observable<number> {
-    return this.http.post<number>(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_PROFILE_EDIT, updatedProfile);
+  public updateProfile(updatedProfile: UserProfile) {
+    this.afDatabase.object(`users/${this.authenticatedUser.uid}`).update(updatedProfile).then(_ => console.log('Profile update successful'))
+      .catch(err => console.log(err, 'Profile update failed'));
+  }
+
+  public uploadProfilePictureAndUpdateDatabaseEntry(file: File, activeProfile: UserProfile) {
+    const pathReference = "users/" + this.authenticatedUser.uid;
+
+
+    this.afStore.upload(pathReference, file).snapshotChanges()
+      .subscribe(
+        uploadSnapshot => {
+          if (this.checkIfUploadFinished(uploadSnapshot)) {
+            console.log("Profile picture upload successful");
+
+            this.afStore.ref(pathReference).getDownloadURL().subscribe(
+              downloadUrl => {
+                 activeProfile.profilePictureUrl = downloadUrl;
+                 this.updateProfile(activeProfile);
+                }
+            );
+          }
+        })
+  }
+
+  public updateProfilePictureUrl(profilePictureUrlObject) {
+    this.afDatabase.object(`users/${this.authenticatedUser.uid}/profilePictureUrl`).update(profilePictureUrlObject)
+    .then(_ => console.log('Profile picture url update successful'))
+    .catch(err => console.log(err, 'Profile picture url update failed'));
+  }
+
+  private checkIfUploadFinished(uploadSnapshot: firebase.storage.UploadTaskSnapshot): boolean {
+    return uploadSnapshot.bytesTransferred === uploadSnapshot.totalBytes;
   }
 
   // Unused as of right now
@@ -78,9 +119,5 @@ export class UserService {
       });
 
     return emailIsAvailable;
-  }
-
-  private handleError(error) {
-    console.error(error);
   }
 }
