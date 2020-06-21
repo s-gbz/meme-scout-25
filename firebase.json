@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "target": "backend",
     "public": "www",
     "ignore": [
       "firebase.json",
