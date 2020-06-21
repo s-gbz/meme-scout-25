@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MemeService } from 'src/app/service/meme.service';
-import { MemeRating } from 'src/app/shared/model/meme-rating';
 import { Meme } from 'src/app/shared/model/meme';
 import { BehaviorSubject } from 'rxjs';
 
@@ -21,27 +20,39 @@ export class MemeView implements OnInit {
     this.requestNewMemes();
   }
 
-  public likeMeme(like: boolean) {
+  public rateMeme(like: boolean) {
     if (this.memesToViewAvailable()) {
-      const memeRating: MemeRating = {
-        memeId: this.availableMemes[this.activeMemeIndex].id,
-        rating: like
+      const memeId = this.availableMemes[this.activeMemeIndex].id;
+
+      if(like) {
+        this.memeService.likeMeme(memeId);
+      } else {
+        this.memeService.dislikeMeme(memeId);
       }
 
-      // this.memeService.rateMeme(meme_rating);
       this.removeFirstMemeAndSetNewActiveMeme();
     }
   }
 
+  // 100% functional
+  showLikedMemes() {
+    this.memeService.getUserLikedMemeReferences().subscribe(
+      likedMemeReferences => {
+        console.log(likedMemeReferences);
+        likedMemeReferences.forEach(memeReference => {
+          this.memeService.requestMeme(memeReference).subscribe(
+            downloadUrl => console.log(downloadUrl)
+          );
+        });
+      }
+    )
+  }
+
   public superLikeMeme() {
     if (this.memesToViewAvailable()) {
-      const memeRating: MemeRating = {
-        memeId: this.availableMemes[this.activeMemeIndex].id,
-        rating: true,
-        superLike: true
-      }
+      const memeId = this.availableMemes[this.activeMemeIndex].id;
 
-      // this.memeService.rateMeme(meme_rating);
+      this.memeService.superLikeMeme(memeId);
       this.removeFirstMemeAndSetNewActiveMeme();
     }
   }

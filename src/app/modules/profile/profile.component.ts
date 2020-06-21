@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/service/user.service';
 import { UserProfile } from '../../shared/model/user-profile';
+import { MemeService } from 'src/app/service/meme.service';
 
 @Component({
   selector: 'profile',
@@ -15,8 +16,9 @@ export class ProfileComponent implements OnInit {
 
   userProfileForm: FormGroup;
   activeProfile: UserProfile = null;
+  fileToUpload: File = null;
 
-  constructor(private fb: FormBuilder, private userService: UserService) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private memeService: MemeService) { }
 
   availableFacts = ProfileFacts;
 
@@ -25,7 +27,7 @@ export class ProfileComponent implements OnInit {
 
     this.userService.getProfile().subscribe(
       profile => {
-        if(profile === null) {
+        if (profile === null) {
           this.activeProfile = this.userProfileForm.value;
           this.setDefaultProfilePicture();
           this.updatetUserProfile();
@@ -36,7 +38,7 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
-  
+
   initializeUserProfileForm() {
     this.userProfileForm = this.fb.group({
       biography: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
@@ -47,12 +49,50 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  updatetUserProfile() {  
+  updatetUserProfile() {
     this.userService.updateProfile(this.userProfileForm.value);
+  }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+  }
+
+  uploadMeme(event) {
+    this.memeService.uploadMemes(event.target.files);
   }
 
   handleProfilePictureUpload(event) {
     this.userService.uploadProfilePictureAndUpdateDatabaseEntry(event.target.files[0], this.activeProfile);
+  }
+
+  public getUserUploadedMemes() {
+    this.memeService.getUserUploadedMemeReferences().subscribe(
+      // Requested structure is a nested array = [ [], [] ]
+      memeReferenceArrays => {
+        const memeReferences = [];
+
+        // Iterate top level to get all arrays
+        for (let i = 0; i < memeReferenceArrays.length; i++) {
+          const singleMemeReferenceArray = <Array<any>>memeReferenceArrays[i];
+
+          // Iterate every array entry to get values
+          for (let j = 0; j < singleMemeReferenceArray.length; j++) {
+            memeReferences.push(singleMemeReferenceArray[j]);
+          };
+        }
+
+        this.memeService.getUserUploadedMemesByReference(memeReferences);
+
+        // Request every individual meme by reference
+        const memeDownloadUrls = [];
+        for(let i = 0; i < memeReferences.length; i++) {
+          this.memeService.requestMeme(memeReferences[i]).subscribe(downloadUrl => 
+            {
+              memeDownloadUrls.push(downloadUrl);
+              console.log(downloadUrl);
+            });
+        }
+      });
   }
 
   logoutUser() {
@@ -60,7 +100,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private setDefaultProfilePicture() {
-      this.activeProfile.profilePictureUrl = "/assets/happy-smile.svg";
+    this.activeProfile.profilePictureUrl = "/assets/happy-smile.svg";
   }
 
   private updateProfileFormValues() {
