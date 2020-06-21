@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Meme } from '../shared/model/meme';
 import { MemeRating } from '../shared/model/meme-rating';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,7 @@ export class MemeService {
 
     private storageRef = this.afStore.storage;
 
-    constructor(private afStore: AngularFireStorage) { }
+    constructor(private afStore: AngularFireStorage, private afDatabase: AngularFireDatabase) { }
 
     public async getMemes(): Promise<Meme[]> {
         // TODO: Substitute with memeIDs when available
@@ -38,7 +39,9 @@ export class MemeService {
         // const file = new File();
 
         // this.afStore.upload(path, file);
-
+        const newId = this.afDatabase.createPushId();
+        console.log(newId);
+        
     }
 
     public uploadMemes(memeIds: string[], files: File[]) {
