@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Meme } from '../shared/model/meme';
-import { MemeRating } from '../shared/model/meme-rating';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { UserService } from './user.service';
@@ -15,6 +14,7 @@ export class MemeService {
 
     constructor(private userService: UserService, private afStore: AngularFireStorage, private afDatabase: AngularFireDatabase) { }
 
+    // Left as example - delete on refactoring
     public async getMemes(): Promise<Meme[]> {
         // TODO: Substitute with memeIDs when available
         const exampleMemeRef = ["tumblr_m2j9xbYh8q1r9pr63o1_500.jpg", "tumblr_m4hrgjTOiS1r9pr63o1_500.jpg", "tumblr_m4tnu5kx2s1qd5giho1_500.jpg", "tumblr_m5yxn0ms7z1r9pr63o1_500.jpg", "tumblr_m893njtVJ81r9pr63o1_500.jpg"]
@@ -29,6 +29,28 @@ export class MemeService {
         }
 
         return newMemes;
+    }
+
+    // Left as example - delete on refactoring
+    private async requestNewMeme(memeStoragePath: firebase.storage.Reference) {
+        let newMeme: Meme;
+
+        await memeStoragePath.getDownloadURL().then(
+            (newUrl) => {
+                newMeme = this.createNewMeme("abc", newUrl, ["tag1", "tag2", "tag3"])
+            }
+        )
+
+        return newMeme;
+    }
+
+    // Left as example - delete on refactoring
+    private createNewMeme(id: string, fileUrl: string, tags?: string[]): Meme {
+        return {
+            id: id,
+            fileUrl: fileUrl,
+            tags: tags
+        }
     }
 
     public likeMeme(memeId: string) {
@@ -53,10 +75,6 @@ export class MemeService {
         this.afDatabase.list(`dislikedMemes/${uid}/dislikedMemes`).push(memeId)
             .then(_ => console.log('Meme dislike successful'))
             .catch(err => console.log(err, 'Meme dislike failed'));
-    }
-
-    public rateMeme(memeRating: MemeRating) {
-        // TODO: Adapt to new backend Function;
     }
 
     public uploadMemes(files: File[]) {
@@ -95,33 +113,8 @@ export class MemeService {
         return this.afDatabase.list(`uploadedMemes/${uid}`).valueChanges();
     }
 
-    public getUserUploadedMemesByReference(memeReferences) {
-        console.log("all values: " + memeReferences);
-        // this.afStore.ref(memeReferences[0]).getDownloadURL().subscribe()
-    }
-
-    private async requestNewMeme(memeStoragePath: firebase.storage.Reference) {
-        let newMeme: Meme;
-
-        await memeStoragePath.getDownloadURL().then(
-            (newUrl) => {
-                newMeme = this.createNewMeme("abc", newUrl, ["tag1", "tag2", "tag3"])
-            }
-        )
-
-        return newMeme;
-    }
-
     public requestMeme(memeReference) {
         const fullMemePath = "memes/" + memeReference;
         return this.afStore.ref(fullMemePath).getDownloadURL();
-    }
-
-    private createNewMeme(id: string, fileUrl: string, tags?: string[]): Meme {
-        return {
-            id: id,
-            fileUrl: fileUrl,
-            tags: tags
-        }
     }
 }
