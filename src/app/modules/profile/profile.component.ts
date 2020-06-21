@@ -21,15 +21,12 @@ export class ProfileComponent implements OnInit {
     this.userService.getProfile().subscribe(
       profile => {
         if(profile === null) {
-          console.log("profile empty!");
           this.activeProfile = this.userProfileForm.value;
-          console.log(this.activeProfile);
           this.setDefaultProfilePicture();
           this.updatetUserProfile();
         } else {
           this.activeProfile = profile;
           this.updateProfileFormValues();
-          console.log(profile);
         }
       }
     );
@@ -45,9 +42,7 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  updatetUserProfile() {
-    console.log(this.userProfileForm.value);
-  
+  updatetUserProfile() {  
     this.userService.updateProfile(this.userProfileForm.value);
   }
 
@@ -60,11 +55,11 @@ export class ProfileComponent implements OnInit {
   }
 
   private setDefaultProfilePicture() {
-    // create file from path
       this.activeProfile.profilePictureUrl = "/assets/happy-smile.svg";
   }
 
   private updateProfileFormValues() {
+    this.userProfileForm.controls["name"].setValue(this.activeProfile.name);
     this.userProfileForm.controls["biography"].setValue(this.activeProfile.biography);
     this.userProfileForm.controls["fact1"].setValue(this.activeProfile.fact1);
     this.userProfileForm.controls["fact2"].setValue(this.activeProfile.fact2);
