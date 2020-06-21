@@ -48,8 +48,8 @@ export class MemeService {
 
         for (let i = 0; i < files.length; i++) {
             this.afStore.upload(pathReferences[i], files[i])
-                .then(_ => console.log(`Meme upload ${i+1}/${files.length} successful`))
-                .catch(err => console.log(err, `Meme upload ${i+1}/${files.length} failed`));
+                .then(_ => console.log(`Meme upload ${i + 1}/${files.length} successful`))
+                .catch(err => console.log(err, `Meme upload ${i + 1}/${files.length} failed`));
         }
 
         const uid = this.userService.getAuthenticatedUser().uid;
@@ -80,6 +80,11 @@ export class MemeService {
         )
 
         return newMeme;
+    }
+
+    public requestMeme(memeReference) {
+        const fullMemePath = "memes/" + memeReference;
+        return this.afStore.ref(fullMemePath).getDownloadURL();
     }
 
     private createNewMeme(id: string, fileUrl: string, tags?: string[]): Meme {
