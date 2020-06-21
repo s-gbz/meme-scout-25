@@ -24,22 +24,22 @@
           </div>
 
           <div padding>
-            <ion-button class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large" type="submit" [disabled]="loginForm.invalid" expand="block">
+            <ion-button class="custom_button" shape="round" size="large" type="submit" [disabled]="loginForm.invalid" expand="block">
               <ion-label><small>Let's swipe!</small></ion-label>
             </ion-button>
 
-            <ion-button class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large"  expand="block">
+            <ion-button class="custom_button" shape="round" size="large"  expand="block">
               <ion-label><small>Forgot password?</small></ion-label>
             </ion-button>
 
-            <ion-button class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large" (click)="loginWithGoogle()" expand="block"><ion-icon name="logo-google" class="custom_icon"></ion-icon>
+            <ion-button class="custom_button" shape="round" size="large" (click)="loginWithGoogle()" expand="block"><ion-icon name="logo-google" class="custom_icon"></ion-icon>
               <ion-label><small>Sign in with Google</small></ion-label>
             </ion-button>
-            <ion-button class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large" (click)="loginWithGithub()" expand="block"><ion-icon name="logo-github" class="custom_icon"></ion-icon>
+            <ion-button class="custom_button" shape="round" size="large" (click)="loginWithGithub()" expand="block"><ion-icon name="logo-github" class="custom_icon"></ion-icon>
               <ion-label><small>Sign in with GitHub</small></ion-label>
             </ion-button>
 
-            <ion-button class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large" expand="block"
+            <ion-button class="custom_button" shape="round" size="large" expand="block"
             [routerLink]="'/authentication'" [queryParams]="{component: 'register'}">
             <ion-label><small>No account yet? Sign up!</small></ion-label>
           </ion-button>

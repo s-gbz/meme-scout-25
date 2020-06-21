@@ -49,20 +49,20 @@
 
          </div>
          <div padding>
-           <ion-button style="--background:rgb(66, 69, 85);" shape="round"class="custom_button" size="large" type="submit" [disabled]="registerForm.invalid" expand="block">
+           <ion-button shape="round"class="custom_button" size="large" type="submit" [disabled]="registerForm.invalid" expand="block">
             <ion-label><small>Sign in!</small></ion-label>
           </ion-button>
            <!-- <ion-button size="large" type="submit" expand="block">Sign Up</ion-button> -->
 
-           <ion-button style="--background:rgb(66, 69, 85);" shape="round" class="custom_button" size="large" (click)="registerWithGoogle()" expand="block"><ion-icon name="logo-google" class="custom_icon"></ion-icon>
+           <ion-button shape="round" class="custom_button" size="large" (click)="registerWithGoogle()" expand="block"><ion-icon name="logo-google" class="custom_icon"></ion-icon>
             <ion-label><small>Sign up with Google</small></ion-label>
           </ion-button>
 
-           <ion-button style="--background:rgb(66, 69, 85);" shape="round" class="custom_button" size="large" (click)="registerWithGithub()" expand="block"><ion-icon name="logo-github" class="custom_icon"></ion-icon>
+           <ion-button shape="round" class="custom_button" size="large" (click)="registerWithGithub()" expand="block"><ion-icon name="logo-github" class="custom_icon"></ion-icon>
             <ion-label><small>Sign up with GitHub</small></ion-label>
           </ion-button>
 
-           <ion-button style="--background:rgb(66, 69, 85);" shape="round" class="custom_button" size="large" expand="block" [routerLink]="'/authentication'" [queryParams]="{component: 'login'}">
+           <ion-button shape="round" class="custom_button" size="large" expand="block" [routerLink]="'/authentication'" [queryParams]="{component: 'login'}">
             <ion-label><small>Have an account? Sign in!</small></ion-label>
           </ion-button>
          </div>

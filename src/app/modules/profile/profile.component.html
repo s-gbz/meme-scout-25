@@ -24,25 +24,25 @@
               </div>
             </ion-item>
 
-            <ion-item class="custom_item" style="--border-radius: 5px; --background: rgb(66, 69, 85); color:#fff;">
+            <ion-item class="custom_item">
               <ion-input formControlName="name" type="text" placeholder="Hi! My name is">
                 <ion-icon name="create-outline" style="color: #ffffff;" class="custom-icon"></ion-icon>
               </ion-input>
             </ion-item>            
 
-            <ion-item class="custom_item" style="--border-radius: 5px; --background:rgb(66, 69, 85); --color: #fff;">
+            <ion-item class="custom_item">
               <ion-select formControlName="fact1" rows="1" placeholder="Select Fact">
                 <ion-select-option *ngFor="let fact1 of ProfileFacts | keyvalue">{{ fact1.key }}</ion-select-option>
               </ion-select>
             </ion-item>
 
-            <ion-item class="custom_item" style="--border-radius: 5px; --background:rgb(66, 69, 85); --color: #fff;">
+            <ion-item class="custom_item">
               <ion-select formControlName="fact2" rows="2" placeholder="Select Fact">
                 <ion-select-option *ngFor="let fact2 of ProfileFacts | keyvalue">{{ fact2.key }}</ion-select-option>
               </ion-select>
             </ion-item>
               
-            <ion-item class="custom_item" style="--border-radius: 5px; --background:rgb(66, 69, 85); --color: #fff;">
+            <ion-item class="custom_item">
               <ion-select formControlName="fact3" rows="3" placeholder="Select Fact">
                 <ion-select-option *ngFor="let fact3 of ProfileFacts | keyvalue">{{ fact3.key }}</ion-select-option>
               </ion-select>
@@ -52,33 +52,26 @@
           <div padding>
           </div>
 
-          <ion-button (click)="updatetUserProfile()" class="custom_button" style="--background:rgb(66, 69, 85); "
+          <ion-button (click)="updatetUserProfile()" class="custom_button"
             shape="round" size="large" type="submit" expand="block">
             <ion-label><small>Update profile</small></ion-label>
           </ion-button>
 
-          <!-- Use when implementing new pop-up view for meme selection -->
-          <!-- <ion-button (click)="uploadMeme(memeUpload.$event)" class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large"
-            type="submit" expand="block">
-            <ion-label><small>Upload a new meme</small></ion-label>
-            <input type="file" id="memeUpload" #memeUpload hidden="true">
-          </ion-button> -->
-
-          <ion-button (click)="memeUpload.click()" class="custom_button" style="--background:rgb(66, 69, 85); "
+          <ion-button (click)="memeUpload.click()" class="custom_button"
             shape="round" size="large" type="submit" expand="block">
             <ion-label><small>Upload new memes</small></ion-label>
           </ion-button>
           <input (change)="uploadMeme($event)" type="file" id="memeUpload" #memeUpload hidden="true" multiple accept=".png, .jpg, .jpeg, .svg">
 
-          <ion-button (click)="getUserUploadedMemes()" class="custom_button" style="--background:rgb(66, 69, 85); " shape="round" size="large"
+          <ion-button (click)="getUserUploadedMemes()" class="custom_button" shape="round" size="large"
             type="submit" expand="block">
             <ion-label><small>Show my memes</small></ion-label>
           </ion-button>
 
-          <ion-button (click)="logoutUser()" color="danger" class="custom_button" style="--background:rgb(66, 69, 85); "
-            shape="round" size="large" type="submit" expand="block">
-            <ion-label><small>Logout</small></ion-label>
-          </ion-button>
+          <ion-button (click)="logoutUser()" color="danger" class="custom_button" shape="round" size="large"
+          type="submit" expand="block">
+          <ion-label><small>Logout</small></ion-label>
+        </ion-button>
         </ion-col>
 
       </ion-row>
