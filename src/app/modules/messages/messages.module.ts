@@ -4,6 +4,8 @@ import { Messages } from './messages.component';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 
+import { AutosizeModule } from 'ngx-autosize';
+
 const routes: Routes = [
   {
     path: '',
@@ -14,8 +16,9 @@ const routes: Routes = [
 @NgModule({
   imports: [
     SharedModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    AutosizeModule
   ],
-  declarations: [Messages]
+  declarations: [Messages],
 })
 export class MessagesModule {}

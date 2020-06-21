@@ -1,3 +1,4 @@
+import { ProfileFacts } from '../../shared/model/profile-facts';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/service/user.service';
@@ -10,10 +11,14 @@ import { UserProfile } from '../../shared/model/user-profile';
 })
 export class ProfileComponent implements OnInit {
 
+  public ProfileFacts = ProfileFacts;
+
   userProfileForm: FormGroup;
   activeProfile: UserProfile = null;
 
   constructor(private fb: FormBuilder, private userService: UserService) { }
+
+  availableFacts = ProfileFacts;
 
   ngOnInit() {
     this.initializeUserProfileForm();
@@ -64,5 +69,15 @@ export class ProfileComponent implements OnInit {
     this.userProfileForm.controls["fact1"].setValue(this.activeProfile.fact1);
     this.userProfileForm.controls["fact2"].setValue(this.activeProfile.fact2);
     this.userProfileForm.controls["fact3"].setValue(this.activeProfile.fact3);
+
+    this.userProfileForm.controls["fact1"].valueChanges.subscribe(data=>{
+      
+    });
+    this.userProfileForm.controls["fact2"].valueChanges.subscribe(data=>{
+   
+    });
+    this.userProfileForm.controls["fact3"].valueChanges.subscribe(data=>{
+
+    });
   }
 }
