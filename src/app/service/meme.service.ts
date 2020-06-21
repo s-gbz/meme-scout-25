@@ -31,6 +31,30 @@ export class MemeService {
         return newMemes;
     }
 
+    public likeMeme(memeId: string) {
+        const uid = this.userService.getAuthenticatedUser().uid;
+
+        this.afDatabase.list(`likedMemes/${uid}/likedMemes`).push(memeId)
+            .then(_ => console.log('Meme like successful'))
+            .catch(err => console.log(err, 'Meme like failed'));
+    }
+    
+    public superLikeMeme(memeId: string) {
+        const uid = this.userService.getAuthenticatedUser().uid;
+
+        this.afDatabase.list(`superLikedMemes/${uid}/superLikedMemes`).push(memeId)
+            .then(_ => console.log('Meme super like successful'))
+            .catch(err => console.log(err, 'Meme super like failed'));
+    }
+
+    public dislikeMeme(memeId: string) {
+        const uid = this.userService.getAuthenticatedUser().uid;
+
+        this.afDatabase.list(`dislikedMemes/${uid}/dislikedMemes`).push(memeId)
+            .then(_ => console.log('Meme dislike successful'))
+            .catch(err => console.log(err, 'Meme dislike failed'));
+    }
+
     public rateMeme(memeRating: MemeRating) {
         // TODO: Adapt to new backend Function;
     }
@@ -57,6 +81,12 @@ export class MemeService {
         this.afDatabase.list(`uploadedMemes/${uid}`).push(newIds)
             .then(_ => console.log('UploadedMemes push successful'))
             .catch(err => console.log(err, 'UploadedMemes push failed'));
+    }
+
+    public getUserLikedMemeReferences() {
+        const uid = this.userService.getAuthenticatedUser().uid;
+
+        return this.afDatabase.list(`likedMemes/${uid}/likedMemes`).valueChanges();
     }
 
     public getUserUploadedMemeReferences() {
