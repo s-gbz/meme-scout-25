@@ -1,14 +1,5 @@
 {
   "projects": {
     "default": "meme-scout-25"
-  },
-  "targets": {
-    "meme-scout-25": {
-      "hosting": {
-        "backend": [
-          "backend-meme-scout-25"
-        ]
-      }
-    }
   }
 }
