@@ -107,6 +107,10 @@ export class UserService {
     return uploadSnapshot.bytesTransferred === uploadSnapshot.totalBytes;
   }
 
+  public getAuthenticatedUser(): firebase.User {
+    return this.authenticatedUser;
+  }
+
   // Unused as of right now
   public async checkIfEmailIsAvailable(email: string): Promise<boolean> {
     let emailIsAvailable = false;

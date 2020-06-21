@@ -3,6 +3,7 @@ import { Meme } from '../shared/model/meme';
 import { MemeRating } from '../shared/model/meme-rating';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { UserService } from './user.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,7 @@ export class MemeService {
 
     private storageRef = this.afStore.storage;
 
-    constructor(private afStore: AngularFireStorage, private afDatabase: AngularFireDatabase) { }
+    constructor(private userService: UserService, private afStore: AngularFireStorage, private afDatabase: AngularFireDatabase) { }
 
     public async getMemes(): Promise<Meme[]> {
         // TODO: Substitute with memeIDs when available
@@ -34,24 +35,30 @@ export class MemeService {
         // TODO: Adapt to new backend Function;
     }
 
-    public uploadSingleMeme(filePath: string) {
-        const path = "memes/" + "testMeme";
-        // const file = new File();
+    public uploadMemes(files: File[]) {
+        const basePath = "memes/";
+        const pathReferences = [];
+        const newIds = [];
 
-        // this.afStore.upload(path, file);
-        const newId = this.afDatabase.createPushId();
-        console.log(newId);
-        
+        for (let i = 0; i < files.length; i++) {
+            const newId = this.afDatabase.createPushId();
+            newIds.push(newId);
+            pathReferences.push(basePath + newId);
+        }
+
+        for (let i = 0; i < files.length; i++) {
+            this.afStore.upload(pathReferences[i], files[i])
+                .then(_ => console.log(`Meme upload ${i+1}/${files.length} successful`))
+                .catch(err => console.log(err, `Meme upload ${i+1}/${files.length} failed`));
+        }
+
+        const uid = this.userService.getAuthenticatedUser().uid;
+
+        this.afDatabase.list(`uploadedMemes/${uid}`).push(newIds)
+            .then(_ => console.log('UploadedMemes push successful'))
+            .catch(err => console.log(err, 'UploadedMemes push failed'));
     }
 
-    public uploadMemes(memeIds: string[], files: File[]) {
-        const path = "memes/" + memeIds[0];
-        const file = files[0];
-
-        this.afStore.upload(path, file).then(_ => console.log('Meme upload successful'))
-        .catch(err => console.log(err, 'Meme upload failed'));
-    }
-    
 
     private async requestNewMeme(memeStoragePath: firebase.storage.Reference) {
         let newMeme: Meme;

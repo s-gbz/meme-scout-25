@@ -53,10 +53,7 @@ export class ProfileComponent implements OnInit {
   }
 
   uploadMeme(event) {
-    // this.memeService.uploadMemes(["memeScout25"], [this.fileToUpload]);
-    console.log(event);
-    
-    // this.memeService.uploadSingleMeme(event.target.files);
+    this.memeService.uploadMemes(event.target.files);
   }
 
   handleProfilePictureUpload(event) {
