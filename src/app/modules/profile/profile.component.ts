@@ -20,9 +20,17 @@ export class ProfileComponent implements OnInit {
 
     this.userService.getProfile().subscribe(
       profile => {
-        this.activeProfile = profile;
-        this.updateProfileFormValues();
-        console.log(profile);
+        if(profile === null) {
+          console.log("profile empty!");
+          this.activeProfile = this.userProfileForm.value;
+          console.log(this.activeProfile);
+          this.setDefaultProfilePicture();
+          this.updatetUserProfile();
+        } else {
+          this.activeProfile = profile;
+          this.updateProfileFormValues();
+          console.log(profile);
+        }
       }
     );
   }
@@ -49,6 +57,11 @@ export class ProfileComponent implements OnInit {
 
   logoutUser() {
     this.userService.logout();
+  }
+
+  private setDefaultProfilePicture() {
+    // create file from path
+      this.activeProfile.profilePictureUrl = "/assets/happy-smile.svg";
   }
 
   private updateProfileFormValues() {
