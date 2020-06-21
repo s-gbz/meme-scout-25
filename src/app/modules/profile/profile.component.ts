@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
       profile => {
         this.activeProfile = profile;
         this.updateProfileFormValues();
+        console.log(profile);
       }
     );
   }
@@ -43,28 +44,11 @@ export class ProfileComponent implements OnInit {
   }
 
   handleProfilePictureUpload(event) {
-    // Upload picture
-    // console.log(newProfilePicture);
-    const newProfilePicture = event.target.files[0];
-
-    // this.userService.uploadProfilePicture(newProfilePicture).subscribe(
-    //   profilePictureUrl => {
-    //   // Get url and set as active profile picture
-    //     this.updateProfilePictureUrl(profilePictureUrl)
-    //   });
-    this.userService.uploadSingleProfilePicture(newProfilePicture)
-    // .subscribe(
-    //   profilePictureUrl => {
-    //       // Get url and set as active profile picture
-    //       console.log(profilePictureUrl.downloadURL);
-          
-    //         this.updateProfilePictureUrl(profilePictureUrl.task.snapshot.downloadURL)
-    //       });
+    this.userService.uploadProfilePictureAndUpdateDatabaseEntry(event.target.files[0], this.activeProfile);
   }
 
-  private updateProfilePictureUrl(profilePictureUrl: string) {
-    this.activeProfile.profilePictureUrl = profilePictureUrl;
-    this.userService.updateProfile(this.activeProfile);
+  logoutUser() {
+    this.userService.logout();
   }
 
   private updateProfileFormValues() {
