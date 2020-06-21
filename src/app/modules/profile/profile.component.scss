@@ -82,6 +82,8 @@ ion-checkbox {
     border-radius: 50px;
     margin: 1em 0;
     fill: clear;
+    color: rgb(66, 69, 85);
+    --background: #fff;
     --background-hover: #c39cd7;
     --min-width: 10em;
 }
@@ -93,11 +95,14 @@ ion-checkbox {
 .custom_item {
     margin: 1em 0;
     opacity: 90%;
+    color: rgb(66, 69, 85);
+    --background: #fff;
     --background-hover-opacity: true;
     --ion-color-danger-shade: #c39cd7;
     --ion-color-danger-tint: #c39cd7;
     --ion-color-danger: #c39cd7;
     --ion-color-success: #9fdee9;
+    --border-radius: 5px;
 }
 
 .avatar {
