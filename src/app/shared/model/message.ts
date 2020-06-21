@@ -1,6 +1,6 @@
 export interface UserMessage { 
-    id: number;
+    timestamp: number;
     sender: number;
-    receiver: number;
-    text: string;
+    recipient: number;
+    messageContent: string;
 }
