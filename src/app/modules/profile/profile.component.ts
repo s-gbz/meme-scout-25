@@ -12,15 +12,12 @@ import { MemeService } from 'src/app/service/meme.service';
 })
 export class ProfileComponent implements OnInit {
 
-  public ProfileFacts = ProfileFacts;
-
+  ProfileFacts = ProfileFacts;
   userProfileForm: FormGroup;
   activeProfile: UserProfile = null;
   fileToUpload: File = null;
 
   constructor(private fb: FormBuilder, private userService: UserService, private memeService: MemeService) { }
-
-  availableFacts = ProfileFacts;
 
   ngOnInit() {
     this.initializeUserProfileForm();
@@ -53,10 +50,6 @@ export class ProfileComponent implements OnInit {
     this.userService.updateProfile(this.userProfileForm.value);
   }
 
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
-  }
-
   uploadMeme(event) {
     this.memeService.uploadMemes(event.target.files);
   }
@@ -81,16 +74,13 @@ export class ProfileComponent implements OnInit {
           };
         }
 
-        this.memeService.getUserUploadedMemesByReference(memeReferences);
-
         // Request every individual meme by reference
         const memeDownloadUrls = [];
-        for(let i = 0; i < memeReferences.length; i++) {
-          this.memeService.requestMeme(memeReferences[i]).subscribe(downloadUrl => 
-            {
-              memeDownloadUrls.push(downloadUrl);
-              console.log(downloadUrl);
-            });
+        for (let i = 0; i < memeReferences.length; i++) {
+          this.memeService.requestMeme(memeReferences[i]).subscribe(downloadUrl => {
+            memeDownloadUrls.push(downloadUrl);
+            console.log(downloadUrl);
+          });
         }
       });
   }
@@ -109,15 +99,5 @@ export class ProfileComponent implements OnInit {
     this.userProfileForm.controls["fact1"].setValue(this.activeProfile.fact1);
     this.userProfileForm.controls["fact2"].setValue(this.activeProfile.fact2);
     this.userProfileForm.controls["fact3"].setValue(this.activeProfile.fact3);
-
-    this.userProfileForm.controls["fact1"].valueChanges.subscribe(data=>{
-      
-    });
-    this.userProfileForm.controls["fact2"].valueChanges.subscribe(data=>{
-   
-    });
-    this.userProfileForm.controls["fact3"].valueChanges.subscribe(data=>{
-
-    });
   }
 }

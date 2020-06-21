@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { User } from '../shared/model/user';
-import { Observable, of, BehaviorSubject } from 'rxjs';
-import { map, switchMap, finalize } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 
-import { UrlConfig } from '../url.config';
 import { auth } from 'firebase';
 import { UserProfile } from '../shared/model/user-profile';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -21,13 +17,11 @@ export class UserService {
 
   authStatus = new BehaviorSubject<firebase.User>(null);
   authenticatedUser: firebase.User;
-  private storageRef = this.afStore.storage;
 
-
-  constructor(private http: HttpClient,
+  constructor(
     private router: Router,
-    private afAuth: AngularFireAuth, 
-    private afDatabase: AngularFireDatabase, 
+    private afAuth: AngularFireAuth,
+    private afDatabase: AngularFireDatabase,
     private afStore: AngularFireStorage) { }
 
 
@@ -63,11 +57,6 @@ export class UserService {
     this.router.navigateByUrl("/authentication");
   }
 
-  private authenticateUser(user: auth.UserCredential) {
-    this.authStatus.next(user.user);
-    this.authenticatedUser = user.user;
-  }
-
   public getProfile(): Observable<any> {
     return this.afDatabase.object(`users/${this.authenticatedUser.uid}`).valueChanges();
   }
@@ -80,7 +69,6 @@ export class UserService {
   public uploadProfilePictureAndUpdateDatabaseEntry(file: File, activeProfile: UserProfile) {
     const pathReference = "users/" + this.authenticatedUser.uid;
 
-
     this.afStore.upload(pathReference, file).snapshotChanges()
       .subscribe(
         uploadSnapshot => {
@@ -89,22 +77,12 @@ export class UserService {
 
             this.afStore.ref(pathReference).getDownloadURL().subscribe(
               downloadUrl => {
-                 activeProfile.profilePictureUrl = downloadUrl;
-                 this.updateProfile(activeProfile);
-                }
+                activeProfile.profilePictureUrl = downloadUrl;
+                this.updateProfile(activeProfile);
+              }
             );
           }
-        })
-  }
-
-  public updateProfilePictureUrl(profilePictureUrlObject) {
-    this.afDatabase.object(`users/${this.authenticatedUser.uid}/profilePictureUrl`).update(profilePictureUrlObject)
-    .then(_ => console.log('Profile picture url update successful'))
-    .catch(err => console.log(err, 'Profile picture url update failed'));
-  }
-
-  private checkIfUploadFinished(uploadSnapshot: firebase.storage.UploadTaskSnapshot): boolean {
-    return uploadSnapshot.bytesTransferred === uploadSnapshot.totalBytes;
+        });
   }
 
   public getAuthenticatedUser(): firebase.User {
@@ -123,5 +101,14 @@ export class UserService {
       });
 
     return emailIsAvailable;
+  }
+
+  private authenticateUser(user: auth.UserCredential) {
+    this.authStatus.next(user.user);
+    this.authenticatedUser = user.user;
+  }
+
+  private checkIfUploadFinished(uploadSnapshot: firebase.storage.UploadTaskSnapshot): boolean {
+    return uploadSnapshot.bytesTransferred === uploadSnapshot.totalBytes;
   }
 }
