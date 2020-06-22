@@ -61,7 +61,7 @@ export class MemeService {
             .then(_ => console.log('Meme like successful'))
             .catch(err => console.log(err, 'Meme like failed'));
     }
-    
+
     public superLikeMeme(memeId: string) {
         const uid = this.userService.getAuthenticatedUser().uid;
 

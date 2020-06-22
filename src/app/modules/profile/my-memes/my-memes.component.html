@@ -1,3 +1,7 @@
-<p>
-  my-memes works!
-</p>
+<ion-content padding style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
+  <ion-slides [options]="sliderOpts">
+    <ion-slide *ngFor="let meme of memes">
+      <img src="{{ meme }}">
+    </ion-slide>
+  </ion-slides>
+</ion-content>
