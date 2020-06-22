@@ -5,4 +5,5 @@ export interface UserProfile {
     fact3: string;
     name: string;
     profilePictureUrl: string;
+    matches: [string];
 }

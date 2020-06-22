@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
-import { UrlConfig } from '../url.config';
 import { UserMessage } from '../shared/model/message';
-import { HttpClient } from '@angular/common/http';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
     providedIn: 'root'
 })
 
-export class MessageService{
+export class MessageService {
 
-    constructor(private http: HttpClient) { }
-    
-    public getMessages(): Observable<UserMessage[]> {
-        // Include a POST mandatory request body - authorization is handled in separate interceptor
-        return this.http.post<UserMessage[]>(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_GET_MESSAGES, {});
+    constructor(private afDatabase: AngularFireDatabase) { }
+
+    public getMessagesForMatchId(matchId: string) {
+        return this.afDatabase.list(`messages/${matchId}`).valueChanges();
     }
 
-    public writeMessage(newMessage: UserMessage): Observable<number> {
-        return this.http.post<number>(UrlConfig.BACKEND_BASE_URL + UrlConfig.USER_WRITE_MESSAGE, newMessage);
+    public sendMessageToMatchId(newMessage: UserMessage, matchId: string) {
+        this.afDatabase.list(`messages/${matchId}`).push(newMessage)
+            .then(_ => console.log('Send message successful'))
+            .catch(err => console.log(err, 'Send message failed'));
     }
 }
