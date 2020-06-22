@@ -1,3 +1,4 @@
+import { AlertMessage } from './../shared/alert-message/alert-message.component';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 
@@ -22,7 +23,8 @@ export class UserService {
     private router: Router,
     private afAuth: AngularFireAuth,
     private afDatabase: AngularFireDatabase,
-    private afStore: AngularFireStorage) { }
+    private afStore: AngularFireStorage,
+    private alertMessage: AlertMessage) { }
 
 
   public register(email: string, password: string): Promise<any> {
@@ -53,7 +55,7 @@ export class UserService {
     await this.afAuth.signOut();
     this.authStatus.next(null);
     this.authenticatedUser = null;
-    console.log("Logout successful");
+    this.alertMessage.presentAlert("Logout successful");
     this.router.navigateByUrl("/authentication");
   }
 
@@ -62,8 +64,8 @@ export class UserService {
   }
 
   public updateProfile(updatedProfile: UserProfile) {
-    this.afDatabase.object(`users/${this.authenticatedUser.uid}`).update(updatedProfile).then(_ => console.log('Profile update successful'))
-      .catch(err => console.log(err, 'Profile update failed'));
+    this.afDatabase.object(`users/${this.authenticatedUser.uid}`).update(updatedProfile).then(_ => this.alertMessage.presentAlert("Update successful"))
+      .catch(err => this.alertMessage.presentAlert("Update failed"));
   }
 
   public uploadProfilePictureAndUpdateDatabaseEntry(file: File, activeProfile: UserProfile) {
@@ -73,7 +75,7 @@ export class UserService {
       .subscribe(
         uploadSnapshot => {
           if (this.checkIfUploadFinished(uploadSnapshot)) {
-            console.log("Profile picture upload successful");
+            this.alertMessage.presentAlert("Picture upload successful");
 
             this.afStore.ref(pathReference).getDownloadURL().subscribe(
               downloadUrl => {
