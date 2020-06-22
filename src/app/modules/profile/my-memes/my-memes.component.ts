@@ -1,7 +1,6 @@
 import { MemeService } from 'src/app/service/meme.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-my-memes',
@@ -10,14 +9,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class MyMemesComponent implements OnInit {
 
-  sliderOpts = {
-    zoom: false,
-    slidesPerView: 1.5,
-    centeredSlides: true,
-    spaceBetween: 20
-  };
-
-  memes = [];
+  myMemes = [];
 
   constructor(private route: ActivatedRoute, private memeService: MemeService) { }
 
@@ -47,9 +39,21 @@ export class MyMemesComponent implements OnInit {
           for (let i = 0; i < memeReferences.length; i++) {
             this.memeService.requestMeme(memeReferences[i]).subscribe(downloadUrl => {
               memeDownloadUrls.push(downloadUrl);
-              this.memes.push(downloadUrl);
+              this.myMemes.push(downloadUrl);
             });
           }
         });
+  }
+
+  public deleteMeme(index: number) {
+    console.log(this.myMemes);
+    if (this.userUploadedMemeArrayIsNotEmpty(index)) {
+      this.myMemes.splice(index, 1);
+      console.log(this.myMemes);
+    }
+  }
+
+  private userUploadedMemeArrayIsNotEmpty(index: number): boolean {
+    return this.myMemes != null && index > -1;
   }
 }

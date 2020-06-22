@@ -1,7 +1,12 @@
 <ion-content padding style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
-  <ion-slides [options]="sliderOpts">
-    <ion-slide *ngFor="let meme of memes">
-      <img src="{{ meme }}">
-    </ion-slide>
-  </ion-slides>
+  <ion-list *ngFor="let meme of myMemes; let i = index">
+    <ion-item-sliding>
+      <ion-item>
+        <ion-label><img src="{{ meme }}"></ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteMeme(i)">Delete meme</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
