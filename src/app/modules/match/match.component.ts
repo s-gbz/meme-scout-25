@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/service/user.service';
 import { MessageService } from 'src/app/service/message.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-matches',
-  templateUrl: './matches.component.html',
-  styleUrls: ['./matches.component.scss'],
+  selector: 'match-view',
+  templateUrl: './match.component.html',
+  styleUrls: ['./match.component.scss'],
 })
-export class Matches implements OnInit {
+export class MatchComponent implements OnInit {
 
   activeUserId = null;
   userMatches = [];
 
-  constructor(private userService: UserService, private messageService: MessageService) { }
+  constructor(private router: Router, private userService: UserService, private messageService: MessageService) { }
 
   ngOnInit() {
     this.activeUserId = this.userService.getAuthenticatedUser().uid;
@@ -22,6 +23,11 @@ export class Matches implements OnInit {
 
     // List available matches
     // On click -> open message-view. pass data
+  }
+
+  openChat(chatNumber: number) {
+    console.log("openChat " + chatNumber);
+    this.router.navigate(["", this.userMatches[chatNumber]]);
   }
 
   private subscribeToUserMatches() {

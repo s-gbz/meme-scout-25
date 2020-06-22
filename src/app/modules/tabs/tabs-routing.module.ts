@@ -17,7 +17,7 @@ const routes: Routes = [
       },
       {
         path: 'matches',
-        loadChildren: () => import('../matches/matches.module').then(m => m.MatchesModule)
+        loadChildren: () => import('../match/match.module').then(m => m.MatchModule)
       },
       {
         path: '',

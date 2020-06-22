@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { Matches } from './matches.component';
+import { MatchComponent } from './match.component';
 import { Routes, RouterModule } from '@angular/router';
+import { MessageModule } from '../message/message.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: Matches
+    component: MatchComponent
   }
 ];
 
@@ -18,8 +19,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    MessageModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [Matches]
+  declarations: [MatchComponent]
 })
-export class MatchesModule {}
+export class MatchModule {}
