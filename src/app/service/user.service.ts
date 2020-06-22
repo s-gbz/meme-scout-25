@@ -63,6 +63,10 @@ export class UserService {
     return this.afDatabase.object(`users/${this.authenticatedUser.uid}`).valueChanges();
   }
 
+  public getProfileById(userId: string): Observable<any> {
+    return this.afDatabase.object(`users/${userId}`).valueChanges();
+  }
+
   public updateProfile(updatedProfile: UserProfile) {
     this.afDatabase.object(`users/${this.authenticatedUser.uid}`).update(updatedProfile).then(_ => this.alertMessage.presentAlert("Update successful"))
       .catch(err => this.alertMessage.presentAlert("Update failed"));

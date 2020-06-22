@@ -1,13 +1,46 @@
 <ion-content *ngIf="matchIsValid; else matchIsInvalidDisplay"
   style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
-  <ion-grid>
+  <!--ion-grid>
     <ion-row *ngFor="let message of messages | async; let i = index">
       <ion-col size="9">
         <ion-label><small>whole message: {{message.messageContent}}</small></ion-label>
       </ion-col>
     </ion-row>
+  </ion-grid-->
+  <ion-grid>
+    <ion-row *ngFor="let message of messages | async">
+    <ion-col size="9" *ngIf="activeUserId !== message.sender" class="message other-message">
+      <b>{{ matchPartnerProfile.name }}</b><br>
+      <span>{{ message.messageContent }}</span>
+      <div class="time" text-right><br>
+      {{ message.timestamp | date:'short' }}</div>
+    </ion-col>
+
+    <ion-col offset="3" size="9" *ngIf="activeUserId === message.sender" class="message my-message">
+      <b>{{ activeUserProfile.name }}</b><br>
+      <span>{{ message.messageContent }}</span>
+      <div class="time" text-right><br>
+      {{ message.timestamp | date:'short' }}</div>
+    </ion-col>
+  </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-row class="ion-align-items-center" no-padding>
+      <ion-col size="10">
+        <textarea maxRows="4" [(ngModel)]="newMsg" class="message-input"></textarea>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button expand="block" fill="clear" color="primary" [disabled]="newMsg === ''" class="msg-btn"
+          (click)="sendMessage()">
+          <ion-icon name="play-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
 
 <ng-template #matchIsInvalidDisplay>
   <ion-content style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">

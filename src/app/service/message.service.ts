@@ -25,4 +25,8 @@ export class MessageService {
             .then(_ => console.log('Send message successful'))
             .catch(err => console.log(err, 'Send message failed'));
     }
+
+    public getMatchDetailsByMatchId(matchId: string) : Observable<any> {
+        return this.afDatabase.object(`matches/${matchId}`).valueChanges();
+    }
 }
