@@ -28,10 +28,10 @@ ion-avatar {
     margin: 0.5em 0;
     fill: clear;
     color: rgb(66, 69, 85);
-    --background:#fff;
-    --background-hover: #9fdee9;
     --background-hover-opacity: true;
     --min-width: 10em;
+    --background: #ffffff;
+    --background-hover: rgb(205, 203, 203);
 }
 
 .custom_item{

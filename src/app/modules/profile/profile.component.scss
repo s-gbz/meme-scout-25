@@ -73,9 +73,12 @@ ion-checkbox {
     cursor: pointer;
     line-height: 50px;
     text-align: center;
+    fill: #fff;
+    color: #c39cd7
 }
 .inputfile + label svg {
     fill: #fff;
+    color: #c39cd7
 }
 .custom_button {
     opacity: 80%;
@@ -83,8 +86,8 @@ ion-checkbox {
     margin: 1em 0;
     fill: clear;
     color: rgb(66, 69, 85);
-    --background: #fff;
-    --background-hover: #9fdee9;
+    --background: #ffffff;
+    --background-hover: rgb(205, 203, 203);
     --background-hover-opacity: true;
     --min-width: 10em;
 }
@@ -96,10 +99,10 @@ ion-checkbox {
 .custom_item {
     margin: 1em 0;
     opacity: 90%;
-    color: rgb(66, 69, 85);
-    --background: #fff;
-    --background-hover-opacity: true;
-    --background-hover: #9fdee9;
+    fill: clear;
+    color: #ffffff;
+    --background: rgb(70, 63, 85);
+    --background-hover: rgb(58, 52, 72);
     --ion-color-danger-shade: #c39cd7;
     --ion-color-danger-tint: #c39cd7;
     --ion-color-danger: #c39cd7;
