@@ -63,7 +63,7 @@
           </ion-button>
           <input (change)="uploadMeme($event)" type="file" id="memeUpload" #memeUpload hidden="true" multiple accept=".png, .jpg, .jpeg, .svg">
 
-          <ion-button (click)="getUserUploadedMemes()" class="custom_button" shape="round" size="large"
+          <ion-button [routerLink]="'/tabs/profile/my-memes'" [queryParams]="{activeProfile: activeProfile}" (click)="getUserUploadedMemes()" class="custom_button" shape="round" size="large"
             type="submit" expand="block">
             <ion-label><small>Show my memes</small></ion-label>
           </ion-button>
