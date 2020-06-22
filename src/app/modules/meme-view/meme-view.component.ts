@@ -10,8 +10,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MemeView implements OnInit {
 
+  // *ngIf="allMemeReferences && allMemeReferences.length != 0" 
   allMemeReferences: [];
-  availableMemes: Meme[];
+  availableMemeUrls = [];
   activeMemeIndex: number;
   memesLoaded: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
@@ -20,19 +21,24 @@ export class MemeView implements OnInit {
   ngOnInit() {
     this.memeService.getAllMemeReferences().subscribe(
       allReferences => {
-        const allReferenceShuffled = this.shuffleArray(allReferences);
-        this.allMemeReferences = allReferenceShuffled;
-        console.log(this.allMemeReferences);
-                
-        // download every 10 subsequent memes
+        this.allMemeReferences = this.shuffleArray(allReferences);
+                        
+        this.requestNewMemesAfterNumberOfViewed(5);
       }
     )
-    // this.requestNewMemes();
+  }
+
+  private requestNewMemesAfterNumberOfViewed(requestIntervall: number) {
+
+
+    this.memeService.requestMeme("memeReference").subscribe(
+      downloadUrl => this.availableMemeUrls.push(downloadUrl)
+    );
   }
 
   public rateMeme(like: boolean) {
     if (this.memesToViewAvailable()) {
-      const memeId = this.availableMemes[this.activeMemeIndex].id;
+      const memeId = this.allMemeReferences[this.activeMemeIndex];
 
       if(like) {
         this.memeService.likeMeme(memeId);
@@ -60,7 +66,7 @@ export class MemeView implements OnInit {
 
   public superLikeMeme() {
     if (this.memesToViewAvailable()) {
-      const memeId = this.availableMemes[this.activeMemeIndex].id;
+      const memeId = this.allMemeReferences[this.activeMemeIndex];
 
       this.memeService.superLikeMeme(memeId);
       this.removeFirstMemeAndSetNewActiveMeme();
@@ -76,21 +82,23 @@ export class MemeView implements OnInit {
 }
 
   public memesToViewAvailable(): boolean {
-    return this.availableMemes.length > 0;
+    return this.availableMemeUrls.length > 0;
   }
 
   private removeFirstMemeAndSetNewActiveMeme() {
-    this.availableMemes.shift();
+    this.availableMemeUrls.shift();
+
   }
 
-  private requestNewMemes() {
-    this.memeService.getMemes().then(
-      (newMemes) =>
-       {         
-         this.availableMemes = newMemes;
-         this.activeMemeIndex = 0;
-         this.memesLoaded.next(true);
-       }
-    );
-  }
+  // To be removed
+  // private requestNewMemes() {
+  //   this.memeService.getMemes().then(
+  //     (newMemes) =>
+  //      {         
+  //        this.availableMemes = newMemes;
+  //        this.activeMemeIndex = 0;
+  //        this.memesLoaded.next(true);
+  //      }
+  //   );
+  // }
 }
