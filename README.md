@@ -1,3 +1,4 @@
+![Continuous-Delivery](https://github.com/s-gbz/meme-scout-25/workflows/Continuous-Delivery/badge.svg)
 # Verwendete Technologien
 - Frontend: Ionic mit Angular
 - Backend: Go
