@@ -1,13 +1,6 @@
 <ion-content *ngIf="matchIsValid; else matchIsInvalidDisplay"
   style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
-  <!--ion-grid>
-    <ion-row *ngFor="let message of messages | async; let i = index">
-      <ion-col size="9">
-        <ion-label><small>whole message: {{message.messageContent}}</small></ion-label>
-      </ion-col>
-    </ion-row>
-  </ion-grid-->
-  <ion-grid>
+  <ion-grid *ngIf="userAndPartnerProfileLoaded()" >
     <ion-row *ngFor="let message of messages | async">
     <ion-col size="9" *ngIf="activeUserId !== message.sender" class="message other-message">
       <b>{{ matchPartnerProfile.name }}</b><br>

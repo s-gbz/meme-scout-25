@@ -1,12 +1,10 @@
 import { UserService } from 'src/app/service/user.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'src/app/service/message.service';
 import { UserMessage } from 'src/app/shared/model/user-message';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { IonContent } from '@ionic/angular';
-import { User } from 'firebase';
 
 @Component({
   selector: 'message-view',
@@ -24,8 +22,10 @@ export class MessageComponent implements OnInit {
   matchPartnerProfile = null;
 
   messages: Observable<Array<UserMessage>> = null;
-  // messages: UserMessage = null;
   matchIsValid = true;
+
+  newMsg = '';
+  @ViewChild(IonContent, {static:false}) content: IonContent;
 
   constructor(private route: ActivatedRoute, private messageService: MessageService, private userService: UserService) { }
 
@@ -34,32 +34,14 @@ export class MessageComponent implements OnInit {
       passedRouterData => {
         if (this.routerDataHasBeenPassed(passedRouterData)) {
           this.readPassedRouterData(passedRouterData);
-          this.getMatchDetails();
+          this.getMatchDetailsAndSetPartnerId();
           this.getActiveUserProfileDetailsById(this.activeUserId);
-          this.getMatchPartnerProfileDetailsById(this.matchPartnerId);
           this.requestMessages();
         } else {
           console.log("Error - no matchId or activeUserId has been passed");
         }
       });
   }
-
-  newMsg = '';
-  @ViewChild(IonContent, {static:false}) content: IonContent
-
-  /*sendMessage() {
-    this.messages.push({
-      user: 'aleksej',
-      createdAt: new Date().getTime(),
-      msg: this.newMsg
-    });
-
-    this.newMsg = '';
-    setTimeout(() => {
-      this.content.scrollToBottom(200);
-    });
-    this.messageService.sendMessageToMatchId();
-  }*/
 
   sendMessage() {
     const newMessage: UserMessage = {
@@ -78,17 +60,7 @@ export class MessageComponent implements OnInit {
   }
 
   private requestMessages() {
-    this.messages = this.messageService.getMessagesForMatchId(this.matchId)
-    // this.messages = this.messageService.getMessagesForMatchId(this.matchId).pipe(map(val => val) )
-
-    // this.messageService.getMessagesForMatchId(this.matchId)
-
-    // .subscribe(
-    //   receivedMessages => {
-    //     console.log(receivedMessages);
-    //     this.messages = receivedMessages;
-    //   }
-    // );
+    this.messages = this.messageService.getMessagesForMatchId(this.matchId);
   }
 
   private routerDataHasBeenPassed(passedRouterData) {
@@ -98,13 +70,13 @@ export class MessageComponent implements OnInit {
   private readPassedRouterData(passedRouterData) {
     this.matchId = passedRouterData['matchId'];
     this.activeUserId = passedRouterData['activeUserId'];
-    console.log(this.matchId);
   }
 
-  private getMatchDetails() {
+  private getMatchDetailsAndSetPartnerId() {
     this.messageService.getMatchDetailsByMatchId(this.matchId).subscribe(
       matchDetails => {
         this.setMatchPartnerId(matchDetails);
+        this.getMatchPartnerProfileDetailsById(this.matchPartnerId);
       }
     )
   }
@@ -129,12 +101,9 @@ export class MessageComponent implements OnInit {
     } else{
       this.matchPartnerId = matchDetails.user1;
     }
-
-    console.log(this.matchPartnerId);
-
   }
 
-  private checkIfMatchIdExists(matchId: string) {
-
+  userAndPartnerProfileLoaded(): boolean {
+    return this.activeUserProfile && this.matchPartnerProfile;
   }
 }
