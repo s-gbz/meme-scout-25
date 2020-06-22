@@ -1,3 +1,4 @@
+import { AlertMessage } from './../shared/alert-message/alert-message.component';
 import { Injectable } from '@angular/core';
 import { Meme } from '../shared/model/meme';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -12,7 +13,7 @@ export class MemeService {
 
     private storageRef = this.afStore.storage;
 
-    constructor(private userService: UserService, private afStore: AngularFireStorage, private afDatabase: AngularFireDatabase) { }
+    constructor(private userService: UserService, private afStore: AngularFireStorage, private afDatabase: AngularFireDatabase, private alertMessage: AlertMessage) { }
 
     // Left as example - delete on refactoring
     public async getMemes(): Promise<Meme[]> {
@@ -97,8 +98,8 @@ export class MemeService {
         const uid = this.userService.getAuthenticatedUser().uid;
 
         this.afDatabase.list(`uploadedMemes/${uid}`).push(newIds)
-            .then(_ => console.log('UploadedMemes push successful'))
-            .catch(err => console.log(err, 'UploadedMemes push failed'));
+            .then(_ => this.alertMessage.presentAlert('Meme upload successful'))
+            .catch(err => this.alertMessage.presentAlert('Meme upload failed'));
     }
 
     public getUserLikedMemeReferences() {
