@@ -20,11 +20,10 @@ export class MemeView implements OnInit {
   ngOnInit() {
     this.memeService.getAllMemeReferences().subscribe(
       allReferences => {
-        this.allMemeReferences = allReferences;
+        const allReferenceShuffled = this.shuffleArray(allReferences);
+        this.allMemeReferences = allReferenceShuffled;
         console.log(this.allMemeReferences);
-        
-        // shuffle array
-        
+                
         // download every 10 subsequent memes
       }
     )
@@ -67,6 +66,14 @@ export class MemeView implements OnInit {
       this.removeFirstMemeAndSetNewActiveMeme();
     }
   }
+
+  private shuffleArray(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
 
   public memesToViewAvailable(): boolean {
     return this.availableMemes.length > 0;
