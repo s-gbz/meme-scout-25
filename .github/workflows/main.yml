@@ -13,7 +13,11 @@ jobs:
 
     - name: Trigger production build
       run: ng build --prod
-      
-    - name: Deploy the build to firebase
-      run: firebase deploy --only hosting
+
+    - name: GitHub Action for Firebase
+      uses: w9jds/firebase-action@v1.5.0
+      with:
+        args: deploy --only hosting
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
