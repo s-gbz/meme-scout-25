@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'src/app/service/message.service';
 
 @Component({
   selector: 'message-view',
@@ -8,23 +9,46 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class MessageComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  activeUserId = null;
+  matchId = null;
+  messages = [];
+
+  constructor(private route: ActivatedRoute, private messageService: MessageService) { }
 
   ngOnInit() {
-    this.readPassedRouterData();
+    this.route.params.subscribe(
+      passedRouterData => {
+        if (this.routerDataHasBeenPassed(passedRouterData)) {
+          this.readPassedRouterData(passedRouterData);
+          this.requestMessages();
+        } else {
+          console.log("Error - no matchId or activeUserId has been passed");
+        }
+      });
   }
 
   sendMessage() {
 
   }
 
-  private readPassedRouterData() {
-    this.route.params.subscribe(
-      passedRouterData => {
-        if (passedRouterData['matchId'] && passedRouterData['activeUserId']) {
-          console.log(passedRouterData['matchId']);
-          console.log(passedRouterData['activeUserId']);
-        }
-      });
+  private requestMessages() {
+    this.messageService.getMessagesForMatchId(this.matchId).subscribe(
+      messages => {
+        console.log(messages);
+      }
+    )
+  }
+
+  private routerDataHasBeenPassed(passedRouterData) {
+    return passedRouterData['matchId'] && passedRouterData['activeUserId'];
+  }
+
+  private readPassedRouterData(passedRouterData) {
+    this.matchId = passedRouterData['matchId'];
+    this.activeUserId = passedRouterData['activeUserId'];
+  }
+
+  private checkIfMatchIdExists(matchId: string) {
+
   }
 }
