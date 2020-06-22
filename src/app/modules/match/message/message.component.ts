@@ -13,6 +13,7 @@ export class MessageComponent implements OnInit {
   activeUserId = null;
   matchId = null;
   messages: UserMessage = null;
+  matchIsValid = true;
 
   constructor(private route: ActivatedRoute, private messageService: MessageService) { }
 
