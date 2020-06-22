@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MemeView implements OnInit {
 
+  allMemeReferences: [];
   availableMemes: Meme[];
   activeMemeIndex: number;
   memesLoaded: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -17,7 +18,17 @@ export class MemeView implements OnInit {
   constructor(private memeService: MemeService) { }
 
   ngOnInit() {
-    this.requestNewMemes();
+    this.memeService.getAllMemeReferences().subscribe(
+      allReferences => {
+        this.allMemeReferences = allReferences;
+        console.log(this.allMemeReferences);
+        
+        // shuffle array
+        
+        // download every 10 subsequent memes
+      }
+    )
+    // this.requestNewMemes();
   }
 
   public rateMeme(like: boolean) {
