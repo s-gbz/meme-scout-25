@@ -1,0 +1,19 @@
+name: Continuous-Delivery
+
+on:
+  push:
+    branches: [ master, developer ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Trigger production build
+      run: ng build --prod
+      
+    - name: Deploy the build to firebase
+      run: firebase deploy --only hosting
+
