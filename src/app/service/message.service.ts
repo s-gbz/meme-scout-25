@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { UserMessage } from '../shared/model/message';
+import { UserMessage } from '../shared/model/user-message';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 

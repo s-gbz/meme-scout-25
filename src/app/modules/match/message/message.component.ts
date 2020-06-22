@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'src/app/service/message.service';
+import { UserMessage } from 'src/app/shared/model/user-message';
 
 @Component({
   selector: 'message-view',
@@ -11,7 +12,7 @@ export class MessageComponent implements OnInit {
 
   activeUserId = null;
   matchId = null;
-  messages = [];
+  messages: UserMessage = null;
 
   constructor(private route: ActivatedRoute, private messageService: MessageService) { }
 
