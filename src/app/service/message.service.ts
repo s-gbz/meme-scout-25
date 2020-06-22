@@ -11,6 +11,10 @@ export class MessageService {
 
     constructor(private afDatabase: AngularFireDatabase) { }
 
+    public getMatchesForUserId(userId: string) {
+        return this.afDatabase.list(`users/${userId}/matches`).valueChanges();
+    }
+
     public getMessagesForMatchId(matchId: string) {
         return this.afDatabase.list(`messages/${matchId}`).valueChanges();
     }
