@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { Messages } from './messages.component';
+import { MyMemesComponent } from './my-memes.component';
 
-describe('MessagesComponent', () => {
-  let component: Messages;
-  let fixture: ComponentFixture<Messages>;
+describe('MyMemesComponent', () => {
+  let component: MyMemesComponent;
+  let fixture: ComponentFixture<MyMemesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [Messages],
+      declarations: [ MyMemesComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Messages);
+    fixture = TestBed.createComponent(MyMemesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

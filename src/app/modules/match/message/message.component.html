@@ -1,0 +1,54 @@
+<div *ngIf="messages != null; else noMessagesAvailable">
+  <ion-content style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
+    <ion-grid>
+      <!-- <ion-row *ngFor="let message of messages">
+      <ion-col size="9" *ngIf="currentUser !== message.user" class="message other-message">
+        <b>{{ message.user }}</b><br>
+        <span>{{ message.msg }}</span>
+        <div class="time" text-right><br>
+        {{ message.createdAt | date:'short' }}</div>
+      </ion-col>
+
+      <ion-col offset="3" size="9" *ngIf="currentUser === message.user" class="message my-message">
+        <b>{{ message.user }}</b><br>
+        <span>{{ message.msg }}</span>
+        <div class="time" text-right><br>
+        {{ message.createdAt | date:'short' }}</div>
+      </ion-col>
+    </ion-row> -->
+    </ion-grid>
+  </ion-content>
+
+  <ion-footer>
+    <ion-toolbar color="light">
+      <ion-row class="ion-align-items-center" no-padding>
+        <ion-col size="10">
+          <textarea autosize maxRows="4" [(ngModel)]="newMsg" class="message-input"></textarea>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button expand="block" fill="clear" color="primary" [disabled]="newMsg === ''" class="msg-btn"
+            (click)="sendMessage()">
+            <ion-icon name="play-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ion-footer>
+</div>
+
+<ng-template #noMessagesAvailable>
+  <ion-content style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-md="6" size-lg="6" size-xs="12">
+        <div>
+          <ion-img src="/assets/sad-forever-alone.svg"></ion-img>
+          <h3 class="bold-center" style="color: #fff">This match does not exist. Sorry!</h3>
+
+          <ion-button [routerLink]="'/tabs/matches'" color="primary" shape="round" size="large" type="submit" expand="block">
+            <ion-label><small>Back to matches</small></ion-label>
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-content>
+</ng-template>

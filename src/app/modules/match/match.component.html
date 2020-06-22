@@ -1,0 +1,12 @@
+<ion-content style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
+  <ion-grid>
+    <ion-row *ngFor="let match of userMatches; let i = index">
+      <ion-col size="9">
+        <ion-button (click)="openChat(i)" color="primary" class="custom_button" shape="round" size="large" type="submit"
+          expand="block">
+          <ion-label><small>Open chat {{i}}</small></ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
