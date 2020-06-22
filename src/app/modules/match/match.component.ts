@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/service/user.service';
 import { MessageService } from 'src/app/service/message.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'match-view',
@@ -18,16 +18,15 @@ export class MatchComponent implements OnInit {
   ngOnInit() {
     this.activeUserId = this.userService.getAuthenticatedUser().uid;
     this.subscribeToUserMatches();
-
-    // If matches
-
-    // List available matches
-    // On click -> open message-view. pass data
   }
 
   openChat(chatNumber: number) {
-    console.log("openChat " + chatNumber);
-    this.router.navigate(["tabs/matches", this.userMatches[chatNumber]]);
+    const dataToPass = {
+      matchId: this.userMatches[chatNumber],
+      activeUserId: this.activeUserId
+    };
+
+    this.router.navigate([`tabs/matches/${this.userMatches[chatNumber]}`, dataToPass]);
   }
 
   private subscribeToUserMatches() {

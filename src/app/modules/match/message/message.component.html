@@ -1,6 +1,6 @@
 <ion-content style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
   <ion-grid>
-    <ion-row *ngFor="let message of messages">
+    <!-- <ion-row *ngFor="let message of messages">
       <ion-col size="9" *ngIf="currentUser !== message.user" class="message other-message">
         <b>{{ message.user }}</b><br>
         <span>{{ message.msg }}</span>
@@ -14,7 +14,7 @@
         <div class="time" text-right><br>
         {{ message.createdAt | date:'short' }}</div>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
   </ion-grid>
 </ion-content>
 

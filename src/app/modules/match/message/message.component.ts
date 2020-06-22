@@ -1,5 +1,5 @@
-import { Component, ViewChild, Input, OnInit } from '@angular/core';
-import { IonContent } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'message-view',
@@ -8,31 +8,23 @@ import { IonContent } from '@ionic/angular';
 })
 export class MessageComponent implements OnInit {
 
-  @Input() activeUserId: string;
-  @Input() matchId: string;
-
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log(this.activeUserId);
-    console.log(this.matchId);
-    
+    this.readPassedRouterData();
   }
 
-  // currentUser = 'aleksej';
-  // newMsg = '';
-  // @ViewChild(IonContent, { static: false }) content: IonContent
-
   sendMessage() {
-    // this.messages.push({
-    //   user: 'aleksej',
-    //   createdAt: new Date().getTime(),
-    //   msg: this.newMsg
-    // });
 
-    // this.newMsg = '';
-    // setTimeout(() => {
-    //   this.content.scrollToBottom(200);
-    // });
+  }
+
+  private readPassedRouterData() {
+    this.route.params.subscribe(
+      passedRouterData => {
+        if (passedRouterData['matchId'] && passedRouterData['activeUserId']) {
+          console.log(passedRouterData['matchId']);
+          console.log(passedRouterData['activeUserId']);
+        }
+      });
   }
 }
