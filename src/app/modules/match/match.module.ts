@@ -5,12 +5,17 @@ import { IonicModule } from '@ionic/angular';
 
 import { MatchComponent } from './match.component';
 import { Routes, RouterModule } from '@angular/router';
-import { MessageModule } from '../message/message.module';
+import { MessageComponent } from './message/message.component';
 
 const routes: Routes = [
   {
     path: '',
     component: MatchComponent
+  },
+  {
+    path: ':matchId',
+    component: MessageComponent,
+    pathMatch: 'full'
   }
 ];
 
@@ -19,9 +24,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    MessageModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MatchComponent]
+  declarations: [MatchComponent, MessageComponent]
 })
 export class MatchModule {}

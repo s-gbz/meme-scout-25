@@ -27,7 +27,7 @@ export class MatchComponent implements OnInit {
 
   openChat(chatNumber: number) {
     console.log("openChat " + chatNumber);
-    this.router.navigate(["", this.userMatches[chatNumber]]);
+    this.router.navigate(["tabs/matches", this.userMatches[chatNumber]]);
   }
 
   private subscribeToUserMatches() {
