@@ -1,6 +1,6 @@
 import { MemeService } from 'src/app/service/meme.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-memes',
@@ -11,7 +11,7 @@ export class MyMemesComponent implements OnInit {
 
   myMemes = [];
 
-  constructor(private route: ActivatedRoute, private memeService: MemeService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private memeService: MemeService) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -45,7 +45,24 @@ export class MyMemesComponent implements OnInit {
         });
   }
 
-  public deleteMeme(index: number) {
+  showLikedMemes() {
+    this.memeService.getUserLikedMemeReferences().subscribe(
+      likedMemeReferences => {
+        console.log(likedMemeReferences);
+        likedMemeReferences.forEach(memeReference => {
+          this.memeService.requestMeme(memeReference).subscribe(
+            downloadUrl => console.log(downloadUrl)
+          );
+        });
+      }
+    )
+  }
+
+  backToProfileView() {
+    this.router.navigateByUrl("/tabs/profile");
+  }
+
+  deleteMeme(index: number) {
     console.log(this.myMemes);
     if (this.userUploadedMemeArrayIsNotEmpty(index)) {
       this.myMemes.splice(index, 1);

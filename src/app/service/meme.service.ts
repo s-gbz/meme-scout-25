@@ -54,6 +54,14 @@ export class MemeService {
         }
     }
 
+    public deleteUserUploadedMeme(keyOfMemeId: string) {
+        const uid = this.userService.getAuthenticatedUser().uid;
+
+        this.afDatabase.list(`likedMemes/${uid}/likedMemes`).remove(keyOfMemeId)
+            .then(_ => console.log('Meme deletion successful'))
+            .catch(err => console.log(err, 'Meme deletion failed'));
+    }
+
     public likeMeme(memeId: string) {
         const uid = this.userService.getAuthenticatedUser().uid;
 
