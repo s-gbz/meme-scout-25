@@ -1,8 +1,13 @@
-<div *ngIf="matchIsValid; else matchIsInvalidDisplay">
-  <ion-content style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
-    
-  </ion-content>
-</div>
+<ion-content *ngIf="matchIsValid; else matchIsInvalidDisplay"
+  style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
+  <ion-grid>
+    <ion-row *ngFor="let message of messages | async; let i = index">
+      <ion-col size="9">
+        <ion-label><small>whole message: {{message.messageContent}}</small></ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
 
 <ng-template #matchIsInvalidDisplay>
   <ion-content style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
@@ -12,7 +17,8 @@
           <ion-img src="/assets/sad-forever-alone.svg"></ion-img>
           <h3 class="bold-center" style="color: #fff">This match does not exist. Sorry!</h3>
 
-          <ion-button [routerLink]="'/tabs/matches'" color="primary" shape="round" size="large" type="submit" expand="block">
+          <ion-button [routerLink]="'/tabs/matches'" color="primary" shape="round" size="large" type="submit"
+            expand="block">
             <ion-label><small>Back to matches</small></ion-label>
           </ion-button>
         </div>

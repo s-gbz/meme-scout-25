@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'src/app/service/message.service';
 import { UserMessage } from 'src/app/shared/model/user-message';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'message-view',
@@ -12,7 +14,8 @@ export class MessageComponent implements OnInit {
 
   activeUserId = null;
   matchId = null;
-  messages: UserMessage = null;
+  messages: Observable<Array<UserMessage>> = null;
+  // messages: UserMessage = null;
   matchIsValid = true;
 
   constructor(private route: ActivatedRoute, private messageService: MessageService) { }
@@ -34,11 +37,17 @@ export class MessageComponent implements OnInit {
   }
 
   private requestMessages() {
-    this.messageService.getMessagesForMatchId(this.matchId).subscribe(
-      messages => {
-        console.log(messages);
-      }
-    )
+    this.messages = this.messageService.getMessagesForMatchId(this.matchId)
+    // this.messages = this.messageService.getMessagesForMatchId(this.matchId).pipe(map(val => val) )
+
+    // this.messageService.getMessagesForMatchId(this.matchId)
+
+    // .subscribe(
+    //   receivedMessages => {
+    //     console.log(receivedMessages);
+    //     this.messages = receivedMessages;
+    //   }
+    // );
   }
 
   private routerDataHasBeenPassed(passedRouterData) {
