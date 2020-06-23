@@ -43,20 +43,6 @@ export class MemeView implements OnInit {
     }
   }
 
-  // 100% functional
-  showLikedMemes() {
-    this.memeService.getUserLikedMemeReferences().subscribe(
-      likedMemeReferences => {
-        console.log(likedMemeReferences);
-        likedMemeReferences.forEach(memeReference => {
-          this.memeService.requestMeme(memeReference).subscribe(
-            downloadUrl => console.log(downloadUrl)
-          );
-        });
-      }
-    )
-  }
-
   public superLikeMeme() {
     if (this.memesToViewAvailable()) {
       const memeId = this.allMemeReferences[this.activeMemeIndex];

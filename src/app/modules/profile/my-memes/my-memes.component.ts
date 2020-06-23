@@ -11,7 +11,7 @@ export class MyMemesComponent implements OnInit {
 
   myMemes = [];
 
-  constructor(private router: Router, private route: ActivatedRoute, private memeService: MemeService) { }
+  constructor(private router: Router, private memeService: MemeService) { }
 
   ngOnInit() {
 
