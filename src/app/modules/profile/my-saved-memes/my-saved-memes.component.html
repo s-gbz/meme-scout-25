@@ -1,5 +1,5 @@
-<ion-content *ngIf="myMemes.length != 0; else noMemesUploaded" padding style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
-  <ion-list *ngFor="let meme of myMemes; let i = index">
+<ion-content *ngIf="mySavedMemes.length != 0; else noMemesSaved" padding style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
+  <ion-list *ngFor="let meme of mySavedMemes; let i = index">
     <ion-item-sliding class="ion-justify-content-center">
       <ion-item >
         <ion-label><img src="{{ meme }}"></ion-label>
@@ -14,14 +14,13 @@
   </ion-list>
 </ion-content>
 
-<ng-template #noMemesUploaded>
+<ng-template #noMemesSaved>
   <ion-content style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
     <ion-row class="ion-justify-content-center">
       <ion-col size-md="6" size-lg="6" size-xs="12">
         <div>
-          <ion-img src="/assets/neutral-bad-poker-face.svg"></ion-img>
-          <h3 class="bold-center" style="color: #fff">..no memes uploaded yet?</h3>
-          <h3 class="bold-center" style="color: #fff">You know what to do.</h3>
+          <ion-img src="/assets/neutral-whyyyyy.svg"></ion-img>
+          <h3 class="bold-center" style="color: #fff">No memes saved so far. Go find some!</h3>
 
           <ion-button [routerLink]="'/tabs/profile'" color="primary" shape="round" size="large" type="submit"
             expand="block">

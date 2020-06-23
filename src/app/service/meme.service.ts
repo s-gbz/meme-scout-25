@@ -125,6 +125,12 @@ export class MemeService {
         return this.afDatabase.list(`likedMemes/${uid}/likedMemes`).valueChanges();
     }
 
+    public getUserSuperLikedMemeReferences() {
+        const uid = this.userService.getAuthenticatedUser().uid;
+
+        return this.afDatabase.list(`superLikedMemes/${uid}/superLikedMemes`).valueChanges();
+    }
+
     public getUserUploadedMemeReferences() {
         const uid = this.userService.getAuthenticatedUser().uid;
 
@@ -136,7 +142,7 @@ export class MemeService {
         return this.afStore.ref(fullMemePath).getDownloadURL();
     }
 
-    public requestMemeWithoutStoragePrefix(fullMemeference: string) {
+    public requestMemeWithoutStoragePrefix(fullMemeference) {
         return this.afStore.ref(fullMemeference).getDownloadURL();
     }
 }

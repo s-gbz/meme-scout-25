@@ -58,33 +58,6 @@ export class ProfileComponent implements OnInit {
     this.userService.uploadProfilePictureAndUpdateDatabaseEntry(event.target.files[0], this.activeProfile);
   }
 
-  public getUserUploadedMemes() {
-    this.memeService.getUserUploadedMemeReferences().subscribe(
-      // Requested structure is a nested array = [ [], [] ]
-      memeReferenceArrays => {
-        const memeReferences = [];
-
-        // Iterate top level to get all arrays
-        for (let i = 0; i < memeReferenceArrays.length; i++) {
-          const singleMemeReferenceArray = <Array<any>>memeReferenceArrays[i];
-
-          // Iterate every array entry to get values
-          for (let j = 0; j < singleMemeReferenceArray.length; j++) {
-            memeReferences.push(singleMemeReferenceArray[j]);
-          };
-        }
-
-        // Request every individual meme by reference
-        const memeDownloadUrls = [];
-        for (let i = 0; i < memeReferences.length; i++) {
-          this.memeService.requestMeme(memeReferences[i]).subscribe(downloadUrl => {
-            memeDownloadUrls.push(downloadUrl);
-            console.log(downloadUrl);
-          });
-        }
-      });
-  }
-
   logoutUser() {
     this.userService.logout();
   }

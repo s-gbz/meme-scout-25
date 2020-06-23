@@ -28,7 +28,13 @@
               <ion-input formControlName="name" type="text" placeholder="Hi! My name is">
                 <ion-icon name="create-outline" class="custom-icon"></ion-icon>
               </ion-input>
-            </ion-item>            
+            </ion-item>
+
+            <ion-item class="custom_item" style="--background:rgb(66, 69, 85);">
+              <ion-input formControlName="biography" type="text" placeholder="Me in one sentence.">
+                <ion-icon name="create-outline" class="custom-icon"></ion-icon>
+              </ion-input>
+            </ion-item>          
 
             <ion-item class="custom_item" style="--border-radius: 5px; --background:rgb(66, 69, 85);">
               <ion-select formControlName="fact1" rows="1" placeholder="Select a fact about you.">
@@ -63,10 +69,15 @@
           </ion-button>
           <input (change)="uploadMeme($event)" type="file" id="memeUpload" #memeUpload hidden="true" multiple accept=".png, .jpg, .jpeg, .svg">
 
-          <ion-button [routerLink]="'/tabs/profile/my-memes'" [queryParams]="{activeProfile: activeProfile}" (click)="getUserUploadedMemes()" class="custom_button" shape="round" size="large"
+          <ion-button [routerLink]="'/tabs/profile/my-memes'" class="custom_button" shape="round" size="large"
             type="submit" expand="block">
-            <ion-label><small>Show my memes</small></ion-label>
+            <ion-label><small>Show my uploaded memes</small></ion-label>
           </ion-button>
+
+          <ion-button [routerLink]="'/tabs/profile/my-saved-memes'" class="custom_button" shape="round" size="large"
+          type="submit" expand="block">
+          <ion-label><small>Show my saved memes</small></ion-label>
+        </ion-button>
 
           <ion-button (click)="logoutUser()" color="danger" class="custom_button" shape="round" size="large"
           type="submit" expand="block">

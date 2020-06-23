@@ -55,7 +55,6 @@ export class UserService {
     await this.afAuth.signOut();
     this.authStatus.next(null);
     this.authenticatedUser = null;
-    this.alertMessage.presentAlert("Logout successful");
     this.router.navigateByUrl("/authentication");
   }
 
