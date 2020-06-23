@@ -1,10 +1,11 @@
 <ion-content style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
   <ion-grid fixed>
-    <div *ngIf="(memesLoaded | async) && memesToViewAvailable(); else noMemesAvailable">
+    <div *ngIf="memesToViewAvailable(); else noMemesAvailable">
       <ion-row class="ion-justify-content-center">
         <ion-col size-md="6" size-lg="6" size-xs="12">
           <div>
-            <ion-img src="{{availableMemeUrls[activeMemeIndex]}}"></ion-img>
+            <ion-img *ngIf="availableMemeUrls[activeMemeIndex]; else memeLoading" src="{{availableMemeUrls[activeMemeIndex]}}"></ion-img>
+            <ng-template #memeLoading><ion-spinner class="center-spinner" name="dots"></ion-spinner></ng-template>
             <ion-row class="ion-row">
               <ion-col>
                 <div>

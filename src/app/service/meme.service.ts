@@ -135,4 +135,8 @@ export class MemeService {
         const fullMemePath = "memes/" + memeReference;
         return this.afStore.ref(fullMemePath).getDownloadURL();
     }
+
+    public requestMemeWithoutStoragePrefix(fullMemeference: string) {
+        return this.afStore.ref(fullMemeference).getDownloadURL();
+    }
 }
