@@ -1,10 +1,21 @@
+<ion-item style ="--background: rgb(66, 69, 85); opacity: 90%;     --background-hover: rgb(79, 82, 97) !important;">
+<ion-toolbar class="custom_toolbar" style="--background-color: rgb(66, 69, 85);">
+  <ion-title style="text-align: center;">Here you can find your matches!</ion-title>
+</ion-toolbar>
+</ion-item>
+
 <ion-content style="--background: url('/assets/bg_light.jpg') no-repeat center/cover fixed;">
   <ion-grid>
     <ion-row *ngFor="let match of userMatches; let i = index">
-      <ion-col size="9">
-        <ion-button (click)="openChat(i)" color="primary" class="custom_button" shape="round" size="large" type="submit"
+      <ion-col size="20">
+       <!--  <ion-button (click)="openChat(i)" class="custom_button" shape="round" size="large" type="submit"
           expand="block">
-          <ion-label><small>Open chat {{i}}</small></ion-label>
+          <ion-label><small>This is you match: {{i}}</small></ion-label>
+        </ion-button>
+        -->
+
+        <ion-button (click)="openChat(i)" class="custom_button" size="large">
+            <ion-label item-left><small>{{i+1}} Click here to start chatting.</small></ion-label>
         </ion-button>
       </ion-col>
     </ion-row>
