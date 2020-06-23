@@ -4,6 +4,7 @@ import { Meme } from '../shared/model/meme';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { UserService } from './user.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +15,10 @@ export class MemeService {
     private storageRef = this.afStore.storage;
 
     constructor(private userService: UserService, private afStore: AngularFireStorage, private afDatabase: AngularFireDatabase, private alertMessage: AlertMessage) { }
+
+    public getAllMemeReferences(): Observable<any> {
+        return this.afDatabase.list(`memes`).valueChanges();
+    }
 
     // Left as example - delete on refactoring
     public async getMemes(): Promise<Meme[]> {
@@ -101,6 +106,10 @@ export class MemeService {
             this.afStore.upload(pathReferences[i], files[i])
                 .then(_ => console.log(`Meme upload ${i + 1}/${files.length} successful`))
                 .catch(err => console.log(err, `Meme upload ${i + 1}/${files.length} failed`));
+
+            this.afDatabase.list(`memes`).push(pathReferences[i])
+                .then(_ => console.log(`Meme database entry ${i + 1}/${files.length} successful`))
+                .catch(err => console.log(err, `Meme database entry ${i + 1}/${files.length} failed`));
         }
 
         const uid = this.userService.getAuthenticatedUser().uid;
@@ -125,5 +134,9 @@ export class MemeService {
     public requestMeme(memeReference) {
         const fullMemePath = "memes/" + memeReference;
         return this.afStore.ref(fullMemePath).getDownloadURL();
+    }
+
+    public requestMemeWithoutStoragePrefix(fullMemeference: string) {
+        return this.afStore.ref(fullMemeference).getDownloadURL();
     }
 }
