@@ -14,10 +14,6 @@ export class MyMemesComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private memeService: MemeService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(
-      passedRouterData => {
-        console.log(passedRouterData);
-      });
 
       this.memeService.getUserUploadedMemeReferences().subscribe(
         // Requested structure is a nested array = [ [], [] ]
